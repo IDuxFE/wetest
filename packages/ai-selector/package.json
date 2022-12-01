@@ -1,7 +1,7 @@
 {
   "name": "@wetest/ai-selector",
   "version": "0.1.14-alpha.0",
-  "description": "智能生成元素选择器",
+  "description": "no code E2E test",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -13,10 +13,22 @@
   ],
   "maintainers": [
     {
-      "name": "uedc"
+      "name": "iduxfe"
+    },
+    {
+      "name": "chhome"
     }
   ],
-  "author": "",
+  "author": "IDuxFE<idux.feteam@gmail.com>",
+  "homepage": "https://github.com/IDuxFE/wetest#readme",
+  "bugs": {
+    "url": "https://github.com/IDuxFE/wetest/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IDuxFE/wetest",
+    "directory": "packages/ai-selector"
+  },
   "license": "MIT",
   "dependencies": {
     "playwright": "1.25.2",
