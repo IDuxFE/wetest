@@ -48,6 +48,14 @@ export type RecorderConfig = CommonConfig & {
   rootDir: string
 
   /**
+   * 是否自动优化用例 case.json 中的 action
+   *
+   * @type {boolean}
+   * @memberof RecorderConfig
+   */
+  optimization: boolean
+
+  /**
    * 登录身份状态保存path
    *
    * @type {string}
@@ -109,44 +117,44 @@ export type RecorderConfig = CommonConfig & {
 }
 
 interface Cookies {
-  name: string;
+  name: string
 
-  value: string;
+  value: string
 
   /**
    * either url or domain / path are required. Optional.
    */
-  url?: string;
+  url?: string
 
   /**
    * either url or domain / path are required Optional.
    */
-  domain?: string;
+  domain?: string
 
   /**
    * either url or domain / path are required Optional.
    */
-  path?: string;
+  path?: string
 
   /**
    * Unix time in seconds. Optional.
    */
-  expires?: number;
+  expires?: number
 
   /**
    * Optional.
    */
-  httpOnly?: boolean;
+  httpOnly?: boolean
 
   /**
    * Optional.
    */
-  secure?: boolean;
+  secure?: boolean
 
   /**
    * Optional.
    */
-  sameSite?: "Strict"|"Lax"|"None";
+  sameSite?: 'Strict' | 'Lax' | 'None'
 }
 
 export type RunnerConfig = CommonConfig & {
@@ -158,17 +166,17 @@ export type RunnerConfig = CommonConfig & {
   errorsDir: string
 
   /**
-  * 身份状态存储文件
-  *
-  * @type {string}
-  */
+   * 身份状态存储文件
+   *
+   * @type {string}
+   */
   stateDir: string
 
-   /**
-  * 浏览器信息自定义，无头浏览器需要自定义，否则可能被业务拦截
-  *
-  * @type {object}
-  */
+  /**
+   * 浏览器信息自定义，无头浏览器需要自定义，否则可能被业务拦截
+   *
+   * @type {object}
+   */
   userAgent: {
     chromium?: string
     firefox?: string
@@ -176,24 +184,24 @@ export type RunnerConfig = CommonConfig & {
   }
 
   /**
-  * 回放时往系统中添加自定义 cookies
-  *
-  * @type {string}
-  */
+   * 回放时往系统中添加自定义 cookies
+   *
+   * @type {string}
+   */
   cookies: Cookies[]
 
   /**
-  * 系统登录页地址
-  *
-  * @type {string}
-  */
+   * 系统登录页地址
+   *
+   * @type {string}
+   */
   loginUrl: string
 
   /**
-  * 将系统中一些加载内容给拦截掉
-  *
-  * @type {string}
-  */
+   * 将系统中一些加载内容给拦截掉
+   *
+   * @type {string}
+   */
   abortUrl?: string | RegExp | ((url: URL) => boolean)
 
   /**
@@ -254,9 +262,8 @@ export type RunnerConfig = CommonConfig & {
    * @memberof RunnerConfig
    */
   reporter: {
-
     // 测试报告是否总是输出追踪栈，默认只是错误的用例输出
-    alwaysShowTracing: boolean,
+    alwaysShowTracing: boolean
 
     // 测试报告的追踪栈是否包含图片（图片帧）
     tracingScreenshots: boolean
