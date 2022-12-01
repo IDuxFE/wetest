@@ -1,0 +1,48 @@
+{
+  "name": "@wetest/cli",
+  "version": "0.1.15-alpha.0",
+  "description": "> TODO: description",
+  "author": "",
+  "maintainers": [
+    {
+      "name": "uedc"
+    }
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "types": "dist/cli/src/index.d.ts",
+  "main": "dist/index.js",
+  "bin": {
+    "wetest": "dist/index.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@endemolshinegroup/cosmiconfig-typescript-loader": "^3.0.2",
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@wetest/engine": "^0.1.15-alpha.0",
+    "@wetest/share": "^0.1.14-alpha.0",
+    "chalk": "^4.1.2",
+    "commander": "^8.2.0",
+    "cosmiconfig": "^7.0.1",
+    "cosmiconfig-ts-loader": "^0.1.1",
+    "dayjs": "^1.10.7",
+    "fast-glob": "^3.2.11",
+    "lodash": "^4.17.21",
+    "ora": "^6.0.1",
+    "playwright-core": "1.25.2",
+    "ts-toolbelt": "^9.6.0"
+  },
+  "devDependencies": {
+    "@types/liftoff": "^4.0.0"
+  },
+  "gitHead": "4155699b03d9c43fca45f4f64a24a2755a79ff89"
+}

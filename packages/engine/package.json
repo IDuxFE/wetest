@@ -1,0 +1,49 @@
+{
+  "name": "@wetest/engine",
+  "version": "0.1.15-alpha.0",
+  "description": "> TODO: description",
+  "maintainers": [
+    {
+      "name": "uedc"
+    }
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "main": "engine/index.js",
+  "module": "engine/index.esm.js",
+  "types": "engine/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "engine",
+    "inject"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@wetest/inject": "^0.1.15-alpha.0",
+    "@wetest/share": "^0.1.14-alpha.0",
+    "@types/pretty": "^2.0.1",
+    "chalk": "4.1.2",
+    "dayjs": "^1.10.7",
+    "debug": "^4.3.2",
+    "dompurify": "^2.4.0",
+    "expect": "^29.2.2",
+    "jsdom": "^20.0.1",
+    "lodash": "^4.17.21",
+    "pixelmatch": "^5.2.1",
+    "playwright": "1.25.2",
+    "playwright-core": "1.25.2",
+    "pngjs": "^6.0.0",
+    "pretty": "^2.0.0",
+    "qs": "^6.10.3",
+    "wait-for-expect": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.7"
+  },
+  "gitHead": "4155699b03d9c43fca45f4f64a24a2755a79ff89"
+}

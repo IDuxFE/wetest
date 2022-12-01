@@ -1,0 +1,27 @@
+{
+  "name": "@wetest/marker",
+  "version": "0.1.14-alpha.0",
+  "description": "> TODO: description",
+  "author": "",
+  "maintainers": [
+    {
+      "name": "uedc"
+    }
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "gitHead": "4155699b03d9c43fca45f4f64a24a2755a79ff89"
+}

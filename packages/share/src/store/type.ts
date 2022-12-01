@@ -1,0 +1,1 @@
+export type EngineState = 'running' | 'recording'

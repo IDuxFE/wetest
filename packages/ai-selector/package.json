@@ -1,0 +1,25 @@
+{
+  "name": "@wetest/ai-selector",
+  "version": "0.1.14-alpha.0",
+  "description": "智能生成元素选择器",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist"
+  ],
+  "maintainers": [
+    {
+      "name": "uedc"
+    }
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "1.25.2",
+    "playwright-core": "1.25.2"
+  }
+}

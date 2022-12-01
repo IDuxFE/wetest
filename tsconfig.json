@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["ESNext", "DOM"],
+    "target": "ES5",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declaration": true,
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "noImplicitAny": false,
+    "paths": {
+      "@wetest/engine": ["packages/engine/src"],
+      "@wetest/engine/*": ["packages/engine/src/*"],
+      "@wetest/ai-selector": ["packages/ai-selector/src"],
+      "@wetest/ai-selector/*": ["packages/ai-selector/src/*"],
+      "@wetest/inject": ["packages/inject/src"],
+      "@wetest/inject/*": ["packages/inject/src/*"],
+      "@wetest/share/*": ["packages/share/src/*"],
+      "@wetest/share": ["packages/share/src"],
+      "@wetest/cli": ["packages/cli/src"],
+      "@wetest/cli/*": ["packages/cli/src/*"]
+    }
+  },
+  "exclude": ["**/node_modules/*", "**/dist/*", "packages/ai-selector/src/utils/*"]
+}

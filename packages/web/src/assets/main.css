@@ -1,0 +1,35 @@
+@import "./base.css";
+
+#app {
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+.border-green {
+  border: 1px solid rgb(81, 233, 81);
+}
+
+.border-red {
+  border:  1px solid rgb(235, 73, 73);
+}
+
+.pass {
+  background-color: rgb(81, 233, 81);
+  border-radius: 4px;
+}
+
+.fail {
+  background-color: rgb(235, 73, 73);
+  border-radius: 4px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}

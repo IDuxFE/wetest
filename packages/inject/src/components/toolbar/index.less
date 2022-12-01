@@ -1,0 +1,54 @@
+.wetest-toolbar {
+  position: fixed;
+  box-shadow: 0 0 8px 0 rgba(#000, 0.2);
+  // 设置一个离谱的层级
+  z-index: 1000000;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  background-color: #fff;
+  transform: translate(0);
+
+  &__move {
+    cursor: move;
+    user-select: none;
+    padding: 4px 8px;
+  }
+
+  &__item {
+    font-size: 14px;
+    padding: 0 12px;
+    line-height: 28px;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #000;
+    position: relative;
+    &-fold {
+      position: absolute;
+      left: 0;
+      bottom: 100%;
+      width: 100%;
+      display: none;
+      background: #fff;
+      cursor: default;
+    }
+    &--active {
+      background-color: rosybrown;
+    }
+    &:hover {
+      background-color: rgba(#000, 0.2);
+      .wetest-toolbar__item-fold {
+        display: block;
+      }
+    }
+    &--disabled {
+      cursor: not-allowed;
+      background-color: #eee;
+      color: #aaa;
+      pointer-events: none;
+      &:hover {
+        background-color: #eee;
+      }
+    }
+  }
+}

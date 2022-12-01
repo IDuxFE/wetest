@@ -1,0 +1,24 @@
+{
+  "name": "@wetest/share",
+  "version": "0.1.14-alpha.0",
+  "description": "复用部分",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist"
+  ],
+  "maintainers": [
+    {
+      "name": "uedc"
+    }
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "node-global-storage": "^1.2.3"
+  }
+}

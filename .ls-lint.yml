@@ -1,0 +1,20 @@
+ls:
+  packages/*:
+    .d.ts: camelCase | kebabcase
+    .ts: camelCase
+    .tsx: camelCase
+    .spec.ts: camelCase
+    .config.ts: camelCase
+    .less: camelCase
+    .vue: PascalCase
+
+  scripts:
+    .ts: camelCase
+    .config.ts: camelCase
+    .svg: kebab-case
+
+ignore:
+  - packages/**/node_modules
+  - packages/**/CHANGELOG.md
+  - packages/**/README.md
+  - packages/**/dist
