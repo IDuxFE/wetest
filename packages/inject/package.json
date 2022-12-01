@@ -3,6 +3,9 @@
   "version": "0.0.1-beta",
   "description": "no code E2E test",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "maintainers": [
     {
       "name": "iduxfe"
