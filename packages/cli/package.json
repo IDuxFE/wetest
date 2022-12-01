@@ -2,6 +2,9 @@
   "name": "@wetest/cli",
   "version": "0.0.1-beta",
   "description": "no code E2E test",
+  "publishConfig": {
+    "access": "public"
+  },
   "maintainers": [
     {
       "name": "iduxfe"
