@@ -1,13 +1,25 @@
 {
   "name": "@wetest/engine",
-  "version": "0.1.15-alpha.0",
-  "description": "> TODO: description",
+  "version": "0.0.1-beta.0",
+  "description": "no code E2E test",
   "maintainers": [
     {
-      "name": "uedc"
+      "name": "iduxfe"
+    },
+    {
+      "name": "chhome"
     }
   ],
-  "homepage": "",
+  "author": "IDuxFE<GenHongChan@outlook.com>",
+  "homepage": "https://github.com/IDuxFE/wetest#readme",
+  "bugs": {
+    "url": "https://github.com/IDuxFE/wetest/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IDuxFE/wetest",
+    "directory": "packages/engine"
+  },
   "license": "MIT",
   "main": "engine/index.js",
   "module": "engine/index.esm.js",
