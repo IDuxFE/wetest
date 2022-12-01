@@ -1,6 +1,6 @@
 {
   "name": "@wetest/engine",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1-beta",
   "description": "no code E2E test",
   "maintainers": [
     {
@@ -36,8 +36,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@wetest/inject": "^0.1.15-alpha.0",
-    "@wetest/share": "^0.1.14-alpha.0",
+    "@wetest/inject": "^0.0.1-beta",
+    "@wetest/share": "^0.0.1-beta",
     "@types/pretty": "^2.0.1",
     "chalk": "4.1.2",
     "dayjs": "^1.10.7",
