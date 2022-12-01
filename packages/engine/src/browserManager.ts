@@ -12,11 +12,10 @@ import {
 } from 'playwright'
 import { EventEmitter } from 'stream'
 import { flattenDeep } from 'lodash'
-import { useTraceStart, useTracestop} from './hooks/useTrace'
+import { useTraceStart, useTracestop } from './hooks/useTrace'
 import type TestInfoImpl from './utils/testInfoImpl'
 import { Step } from './types/testInfo'
 import { getEngineIsRunning, getRunnerConfig } from '@wetest/share'
-
 
 export function getBrowser(browser: BrowserName): BrowserType {
   return {
@@ -32,25 +31,24 @@ export class BrowserManger extends EventEmitter {
   private contextIdMap: Map<string, BrowserContext> = new Map()
   private contextMap: Map<BrowserContext, Map<string, Page>> = new Map()
 
-  initListener (testInfoImpl: TestInfoImpl) {
+  initListener(testInfoImpl: TestInfoImpl) {
     let stepIndex = 0
-    const createInstrumentationListener = context => {
+    const createInstrumentationListener = () => {
       return {
         onApiCallBegin: (apiCall, stackTrace, userData) => {
           // playwright api开始监听器
           const stepId = `pw:api@${apiCall}@${stepIndex++}`
 
-          const step :Step = {
+          const step: Step = {
             stepId,
             startTime: Date.now(),
             title: `操作浏览器api：${apiCall}`,
-            status: 'pass'
+            status: 'pass',
           }
 
           testInfoImpl.addStep(step)
 
           userData.userObject = step
-
         },
         onApiCallEnd: (userData, error) => {
           // playwright api结束监听器
@@ -65,25 +63,24 @@ export class BrowserManger extends EventEmitter {
             step.error = error.toString()
             step.status = 'fail'
           }
-        }
-      };
-    };
+        },
+      }
+    }
 
     const onDidCreateBrowserContext = async context => {
-      const listener = createInstrumentationListener(context);
+      const listener = createInstrumentationListener()
 
-      context._instrumentation.addListener(listener);
-    };
+      context._instrumentation.addListener(listener)
+    }
 
     for (const browserType of [chromium, firefox, webkit]) {
-
       // 为个浏览器注册playwright api监听器
-      (browserType as any)._onDidCreateContext = onDidCreateBrowserContext;
+      ;(browserType as any)._onDidCreateContext = onDidCreateBrowserContext
     }
   }
 
   async launch(browserName: BrowserName, launchOptions: LaunchOptions) {
-    const browserType =  getBrowser(browserName)
+    const browserType = getBrowser(browserName)
     this.browser = await browserType.launch(launchOptions)
     return this
   }
@@ -102,7 +99,6 @@ export class BrowserManger extends EventEmitter {
     }
 
     if (getEngineIsRunning()) {
-
       const runnerConfig = getRunnerConfig()
 
       let userAgent = runnerConfig.userAgent
@@ -172,7 +168,7 @@ export class BrowserManger extends EventEmitter {
     await this.browser?.close()
   }
 
-  async stopTracing (saveTracPath: string, id?: string | string[]) {
+  async stopTracing(saveTracPath: string, id?: string | string[]) {
     let contexts: BrowserContext[] = []
     if (!id) {
       contexts = this.browser?.contexts() ?? []
@@ -180,12 +176,14 @@ export class BrowserManger extends EventEmitter {
       const ids = Array.isArray(id) ? id : [id]
       contexts = ids.map(id => this.getContext(id))
     }
-    return Promise.all(contexts.map(async (ctx) => {
-      return await useTracestop(ctx, saveTracPath)
-    }) ?? [])
+    return Promise.all(
+      contexts.map(async ctx => {
+        return await useTracestop(ctx, saveTracPath)
+      }) ?? [],
+    )
   }
 
-  async startTracing (context: BrowserContext, options = {}) {
+  async startTracing(context: BrowserContext, options = {}) {
     return await useTraceStart(context, options)
   }
 }
