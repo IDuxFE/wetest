@@ -13,6 +13,7 @@ export default async function record(url: string, options: RecordCliOptions) {
   const config = new Config(
     {
       recorder: {
+        optimization: true,
         rootDir: resolve(process.cwd(), options.output || ''),
         browser: {
           type: options.browser,
@@ -28,7 +29,6 @@ export default async function record(url: string, options: RecordCliOptions) {
     url,
   })
   recorder.on('exit', () => {
-
     // 这里不能使用 process.exit(1)，退出进程太慢了
     process.exitCode = 0
   })

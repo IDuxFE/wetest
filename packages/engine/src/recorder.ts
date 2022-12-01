@@ -22,12 +22,13 @@ class Recorder extends EventEmitter {
 
   private options: RecorderConfig = {
     rootDir: process.cwd(),
+    optimization: true,
     stateDir: join(process.cwd(), 'state.json'),
     snapshotTransfer: getRecordConfig().snapshotTransfer,
     browser: {
       type: 'chromium',
     },
-    selector: getDefaultSelectorCfg()
+    selector: getDefaultSelectorCfg(),
   }
 
   private recording = false
@@ -141,7 +142,7 @@ class Recorder extends EventEmitter {
 
     const page = await context.newPage()
     await page.goto(url, {
-      waitUntil: 'domcontentloaded'
+      waitUntil: 'domcontentloaded',
     })
   }
 
@@ -223,6 +224,16 @@ class Recorder extends EventEmitter {
         id: context,
       },
     })
+
+    // 对 case.json 进行优化。如：input 会产生多个事件，过滤剩下一个
+    if (this.options.optimization) {
+      const rawActions = this.caseManger.case.actions
+      const optActions = rawActions.filter((item, index) => {
+        const nextActions = rawActions[index + 1]
+        return !(item.action === 'input' && nextActions.action === item.action)
+      })
+      this.caseManger.case.actions = optActions
+    }
 
     this.options.beforeFinishRecord?.({ caseManager: this.caseManger })
 
