@@ -1,7 +1,7 @@
 {
   "name": "wetest",
   "version": "2.0.0",
-  "description": "",
+  "description": "no code E2E test",
   "main": "index.js",
   "private": true,
   "workspaces": [
