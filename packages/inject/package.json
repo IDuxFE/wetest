@@ -24,7 +24,7 @@
   "devDependencies": {
     "css-selector-generator": "^3.4.4",
     "dayjs": "^1.10.7",
-    "naive-ui": "^2.19.2",
+    "naive-ui": "^2.34.2",
     "ts-toolbelt": "^9.6.0",
     "vue-shadow-dom": "^4.0.0",
     "vue-types": "^4.1.1"
