@@ -3,7 +3,15 @@ import pixelmatch from 'pixelmatch'
 import { Page, PageScreenshotOptions } from 'playwright'
 import { expect, createTestInfoStep } from './expect'
 import pretty from 'pretty'
-import { Assertion, ScreenshotAssertion, SnapshotAssertion, UrlAssertion, VisibleAssertion, ValueAssertion, isCheckedAssertion } from './types'
+import {
+  Assertion,
+  ScreenshotAssertion,
+  SnapshotAssertion,
+  UrlAssertion,
+  VisibleAssertion,
+  ValueAssertion,
+  isCheckedAssertion,
+} from './types'
 import { readJson, createDir } from './utils/fs'
 import { join } from 'path'
 import chalk from 'chalk'
@@ -40,13 +48,18 @@ export async function getSnapshot(
     transfer?: (snap: string, raw: string) => string
   },
 ) {
-  const snapshot = await autoTrySelector((selector: string) => page.locator(selector).evaluate(node => node.outerHTML), selectorInfo, page, true)
+  const snapshot = await autoTrySelector(
+    (selector: string) => page.locator(selector).evaluate(node => node.outerHTML),
+    selectorInfo,
+    page,
+    true,
+  )
   const rawSnapshot = pretty(snapshot)
   const window = new JSDOM('').window
   const DOMPurify = createDOMPurify(window)
   const sanitizeSnapshot = DOMPurify.sanitize(snapshot, {
     ALLOWED_ATTR: ['class'],
-    ALLOW_DATA_ATTR: false
+    ALLOW_DATA_ATTR: false,
   })
   return transfer(sanitizeSnapshot, rawSnapshot)
 }
@@ -70,7 +83,12 @@ async function screenshot(
 ) {
   const screenshotParams: PageScreenshotOptions = {}
   if (options.selectorInfo) {
-    const boudingRect = await autoTrySelector((selector: string) => page.locator(selector).boundingBox(), options.selectorInfo, page, true)
+    const boudingRect = await autoTrySelector(
+      (selector: string) => page.locator(selector).boundingBox(),
+      options.selectorInfo,
+      page,
+      true,
+    )
     if (boudingRect) {
       screenshotParams.clip = boudingRect
     }
@@ -139,11 +157,10 @@ export class Assertor {
    * @memberof Assertor
    */
   async assertScreenshot(assertion: ScreenshotAssertion, page: Page) {
-
     await page.evaluate('window.__wetest_toggleShowToolbar(false)')
     await screenshot(page, {
       path: join(this.options.screenshotsDir, assertion.params.name),
-      selectorInfo: assertion.params.selector
+      selectorInfo: assertion.params.selector,
     })
     await page.evaluate('window.__wetest_toggleShowToolbar(true)')
   }
@@ -156,7 +173,6 @@ export class Assertor {
    * @memberof Assertor
    */
   async assertSnapshot(assertion: SnapshotAssertion, page: Page) {
-
     const snapshot = await getSnapshot(page, {
       selectorInfo: assertion.params.selector,
       transfer: this.options.snapshotTransfer,
@@ -246,14 +262,14 @@ export class Assertor {
 
     await screenshot(page, {
       path: newScreenshotPath,
-      selectorInfo: assertion.params.selector
+      selectorInfo: assertion.params.selector,
     })
 
     const testStep = createTestInfoStep({
       stepId: `expect:api@expect: ${assertion.context || ''}  ${assertion.params.name}`,
       startTime: Date.now(),
       title: `断言:api@expect: ${assertion.context || ''}  ${assertion.params.name}`,
-      status: 'pass'
+      status: 'pass',
     })
 
     const oldScreenshotPng = PNG.sync.read(readFileSync(oldScreenshotPath))
@@ -262,14 +278,12 @@ export class Assertor {
     const diff = new PNG({ width, height })
 
     // 对比后像素点差异数量值 1px = 1
-    const pxDiffCount = pixelmatch(
-      oldScreenshotPng.data, newScreenshotPng.data, diff.data,
-      width, height,
-      {
-        threshold: 0.2 // 色彩比较的阈值，越低越精确，这里给个不太低的值，防止浏览器渲染有的时候字体虚化导致问题
-      })
+    const pxDiffCount = pixelmatch(oldScreenshotPng.data, newScreenshotPng.data, diff.data, width, height, {
+      threshold: 0.2, // 色彩比较的阈值，越低越精确，这里给个不太低的值，防止浏览器渲染有的时候字体虚化导致问题
+    })
 
-    if (pxDiffCount > 1) { // 对比不通过
+    if (pxDiffCount > 1) {
+      // 对比不通过
       const errorDir = this.options.runtimeDir ?? process.cwd()
       createDir(errorDir)
 
@@ -282,11 +296,7 @@ export class Assertor {
       testStep.status = 'fail'
       testStep.error = `screenshot ${assertion.params.name} compare fail! See ${errorDir}`
       testStep.endTime = Date.now()
-      throw new Error(
-        chalk.red(
-          `screenshot ${assertion.params.name} compare fail! See ${errorDir}`,
-        ),
-      )
+      throw new Error(chalk.red(`screenshot ${assertion.params.name} compare fail! See ${errorDir}`))
     } else {
       rmSync(newScreenshotPath)
       testStep.endTime = Date.now()
@@ -318,11 +328,12 @@ export class Assertor {
    * @param {string} expectSnap
    * @memberof Assertor
    */
-   async runValueAssertion(assertion: ValueAssertion, page: Page) {
-
-    expect(await autoTrySelector((selector:string) => page.inputValue(selector), assertion.params.selector, page)).toBe(assertion.params.value);
+  async runValueAssertion(assertion: ValueAssertion, page: Page) {
+    expect(
+      await autoTrySelector((selector: string) => page.inputValue(selector), assertion.params.selector, page),
+    ).toBe(assertion.params.value)
   }
-    /**
+  /**
    * 执行isChecked断言
    *
    * @param {SnapshotAssertion} assertion
@@ -330,8 +341,9 @@ export class Assertor {
    * @param {string} expectSnap
    * @memberof Assertor
    */
-    async runIsCheckedAssertion(assertion: isCheckedAssertion, page: Page) {
-
-      expect(await autoTrySelector((selector:string) => page.isChecked(selector), assertion.params.selector, page)).toBe(assertion.params.checked);
-    }
+  async runIsCheckedAssertion(assertion: isCheckedAssertion, page: Page) {
+    expect(await autoTrySelector((selector: string) => page.isChecked(selector), assertion.params.selector, page)).toBe(
+      assertion.params.checked,
+    )
+  }
 }

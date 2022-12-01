@@ -8,6 +8,8 @@
     "packages/*"
   ],
   "scripts": {
+    "prepare": "husky install",
+    "preinstall": "npx only-allow pnpm",
     "bts": "lerna bootstrap",
     "clear": "rimraf node_modules && lerna clean --yes",
     "precommit": "ls-lint && lint-staged --no-stash",
