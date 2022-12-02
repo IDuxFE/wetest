@@ -1,5 +1,5 @@
-import { Modifier } from '@wetest/engine'
-import DomSelector from '@wetest/ai-selector'
+import { Modifier } from '@idux/wetest-engine'
+import DomSelector from '@idux/wetest-ai-selector'
 // import getCssSelector from 'css-selector-generator'
 
 export function addEventListener(
@@ -36,7 +36,7 @@ export function getSelector(target: EventTarget) {
   const selectorCfg = window.__wetest_cfg.selectorCfg
 
   let domSelector = new DomSelector({
-    selectorCfg
+    selectorCfg,
   })
 
   // 没有提供wetest_selectorTransfer时，使用默认的方法

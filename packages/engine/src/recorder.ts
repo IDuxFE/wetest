@@ -11,8 +11,8 @@ import { O } from 'ts-toolbelt'
 import { BrowserManger } from './browserManager'
 import { writeJson } from './utils/fs'
 import { existsSync } from 'fs'
-import { getRecordConfig, loginCaseFileName } from '@wetest/share'
-import { getDefaultSelectorCfg } from '@wetest/ai-selector/utils/util'
+import { getRecordConfig, loginCaseFileName } from '@idux/wetest-share'
+import { getDefaultSelectorCfg } from '@idux/wetest-ai-selector/utils/util'
 
 class Recorder extends EventEmitter {
   private browserManager = new BrowserManger()

@@ -1,5 +1,5 @@
 {
-  "name": "wetest",
+  "name": "@idux/wetest",
   "version": "0.0.1-beta",
   "description": "no code E2E test",
   "main": "index.js",
@@ -13,7 +13,7 @@
     "bts": "lerna bootstrap",
     "clear": "rimraf node_modules && lerna clean --yes",
     "precommit": "ls-lint && lint-staged --no-stash",
-    "build:web": "pnpm --filter @wetest/web run build",
+    "build:web": "pnpm --filter @idux/wetest-web run build",
     "build": "pnpm run build:web && ts-node ./scripts/build/build.ts",
     "dev": "npm run build -- -d"
   },

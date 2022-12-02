@@ -11,10 +11,10 @@ import {
   UrlAssertion,
   VisibleAssertion,
   ValueAssertion,
-  isCheckedAssertion
-} from '@wetest/engine'
+  isCheckedAssertion,
+} from '@idux/wetest-engine'
 import dayjs from 'dayjs'
-import { SelectorInfo } from '@wetest/ai-selector'
+import { SelectorInfo } from '@idux/wetest-ai-selector'
 
 export function getHoverAction(event: MouseEvent): HoverAction | null {
   if (!event.target) return null
@@ -28,12 +28,12 @@ export function getHoverAction(event: MouseEvent): HoverAction | null {
   }
 }
 
-export function getWaitForTimeout (params: WaitForTimeoutAction['params']): WaitForTimeoutAction {
+export function getWaitForTimeout(params: WaitForTimeoutAction['params']): WaitForTimeoutAction {
   return {
     action: 'waitForTimeout',
     context: window.__wetest_contextId,
     page: window.__wetest_pageId,
-    params
+    params,
   }
 }
 
@@ -88,13 +88,15 @@ export function getValueAssertion(event: MouseEvent): ValueAssertion | null {
     params: {
       type: 'value',
       selector: getSelector(event.target),
-      value: (event.target as HTMLInputElement).value
+      value: (event.target as HTMLInputElement).value,
     },
   }
 }
 export function getIsCheckedAssertion(event: MouseEvent): isCheckedAssertion | null {
-  if(event.target && ((event.target as HTMLInputElement).type === 'checkbox'|| 
-  (event.target  as HTMLInputElement).type === 'radio') ) {
+  if (
+    event.target &&
+    ((event.target as HTMLInputElement).type === 'checkbox' || (event.target as HTMLInputElement).type === 'radio')
+  ) {
     return {
       action: 'assertion',
       context: window.__wetest_contextId,
@@ -102,7 +104,7 @@ export function getIsCheckedAssertion(event: MouseEvent): isCheckedAssertion | n
       params: {
         type: 'isChecked',
         selector: getSelector(event.target),
-        checked: (event.target as HTMLInputElement).checked
+        checked: (event.target as HTMLInputElement).checked,
       },
     }
   }
@@ -187,7 +189,7 @@ export function getVisibleAssertion(selector: SelectorInfo): VisibleAssertion {
 
 function canPress(event: KeyboardEvent): boolean {
   // 只拦截input上的键盘输入
-  
+
   if (!['INPUT', 'TEXTAREA'].includes((event.target as HTMLElement).tagName)) {
     return true
   }

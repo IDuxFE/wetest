@@ -1,5 +1,5 @@
 {
-  "name": "@wetest/cli",
+  "name": "@idux/wetest-cli",
   "version": "0.0.1-beta",
   "description": "no code E2E test",
   "publishConfig": {
@@ -42,8 +42,8 @@
   "dependencies": {
     "@endemolshinegroup/cosmiconfig-typescript-loader": "^3.0.2",
     "@rollup/plugin-commonjs": "^20.0.0",
-    "@wetest/engine": "^0.0.1-beta",
-    "@wetest/share": "^0.0.1-beta",
+    "@idux/wetest-engine": "^0.0.1-beta",
+    "@idux/wetest-share": "^0.0.1-beta",
     "chalk": "^4.1.2",
     "commander": "^8.2.0",
     "cosmiconfig": "^7.0.1",

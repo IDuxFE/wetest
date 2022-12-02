@@ -1,4 +1,4 @@
-import { Action } from '@wetest/engine'
+import { Action } from '@idux/wetest-engine'
 import { getSelector } from '../../utils/dom'
 import { ref, Ref, onMounted, onUnmounted } from 'vue'
 import { ToolsStatus } from '../../types'
@@ -11,7 +11,7 @@ import {
   getSnapshotAssertion,
   getVisibleAssertion,
   getValueAssertion,
-  getIsCheckedAssertion
+  getIsCheckedAssertion,
 } from '../../utils/actionsFormatter'
 import { addEventListener, preventEvent } from '../../utils/dom'
 
@@ -22,13 +22,15 @@ export function useRecorder(toolsStatus: Ref<ToolsStatus>, recordAction: (action
 
   function listenerWrapper<T extends Event>(action: (event: T) => void) {
     return (event: Event) => {
-      if (!toolsStatus.value.recording || (event.target && event.target instanceof Element && event.target.classList.toString().includes('toolbar'))
-        || (
-          !((event as T) instanceof PointerEvent && (event as PointerEvent).pointerType) &&
+      if (
+        !toolsStatus.value.recording ||
+        (event.target && event.target instanceof Element && event.target.classList.toString().includes('toolbar')) ||
+        (!((event as T) instanceof PointerEvent && (event as PointerEvent).pointerType) &&
           !((event as T) instanceof KeyboardEvent) &&
           !((event as T) instanceof InputEvent) &&
-          !((event as T).type === 'scroll')
-        )) return
+          !((event as T).type === 'scroll'))
+      )
+        return
 
       action(event as T)
     }
@@ -76,12 +78,11 @@ export function useRecorder(toolsStatus: Ref<ToolsStatus>, recordAction: (action
 
   return {
     addRecordActionListeners,
-    removeRecordActionListeners
+    removeRecordActionListeners,
   }
 }
 
 function useClick(toolsStatus: Ref<ToolsStatus>, recordAction: (action: Action) => void): (event: MouseEvent) => void {
-
   return function (event: MouseEvent) {
     if (!event.target) return
     // hovering
@@ -115,16 +116,16 @@ function useClick(toolsStatus: Ref<ToolsStatus>, recordAction: (action: Action) 
       recordAction(getValueAssertion(event)!)
       return
     }
-    
+
     // isChecked断言中
     if (toolsStatus.value.asserting.elementIsChecked) {
-      preventEvent(event);
-      toolsStatus.value.asserting.elementIsChecked = false;
+      preventEvent(event)
+      toolsStatus.value.asserting.elementIsChecked = false
       // preventDefault 只是阻止了事件进行，并没有阻止checked的值的变化
-      const time = setTimeout(() => { 
-        recordAction(getIsCheckedAssertion(event)!);
-        clearTimeout(time);
-      });
+      const time = setTimeout(() => {
+        recordAction(getIsCheckedAssertion(event)!)
+        clearTimeout(time)
+      })
       return
     }
 

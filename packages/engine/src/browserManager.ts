@@ -1,4 +1,4 @@
-import { BrowserName } from '@wetest/engine'
+import { BrowserName } from '@idux/wetest-engine'
 import {
   chromium,
   firefox,
@@ -15,7 +15,7 @@ import { flattenDeep } from 'lodash'
 import { useTraceStart, useTracestop } from './hooks/useTrace'
 import type TestInfoImpl from './utils/testInfoImpl'
 import { Step } from './types/testInfo'
-import { getEngineIsRunning, getRunnerConfig } from '@wetest/share'
+import { getEngineIsRunning, getRunnerConfig } from '@idux/wetest-share'
 
 export function getBrowser(browser: BrowserName): BrowserType {
   return {

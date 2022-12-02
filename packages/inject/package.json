@@ -1,5 +1,5 @@
 {
-  "name": "@wetest/inject",
+  "name": "@idux/wetest-inject",
   "version": "0.0.1-beta",
   "description": "no code E2E test",
   "types": "dist/index.d.ts",

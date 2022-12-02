@@ -1,5 +1,5 @@
 {
-  "name": "@wetest/marker",
+  "name": "@idux/wetest-marker",
   "version": "0.0.1-beta",
   "description": "no code E2E test",
   "publishConfig": {

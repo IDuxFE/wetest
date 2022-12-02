@@ -1,11 +1,11 @@
 import glob from 'fast-glob'
 import { join, resolve } from 'path'
-import { Runner } from '@wetest/engine'
+import { Runner } from '@idux/wetest-engine'
 import chalk from 'chalk'
 import { Config } from './config'
 import { TestCollectInfo } from './types'
 import { appendFileSync, writeFileSync, cpSync } from 'fs'
-import { createDir, setRunnerConfig, setEngineState, loginCaseFileName } from '@wetest/share'
+import { createDir, setRunnerConfig, setEngineState, loginCaseFileName } from '@idux/wetest-share'
 
 interface RunCliOptions {
   headless?: boolean
@@ -32,7 +32,7 @@ export default async function run(casesDir: string, options: RunCliOptions) {
         actionInterval: options.actionInterval ? Number(options.actionInterval) : undefined,
         browser: {
           headless: !!options.headless,
-        }
+        },
       },
     },
     options.config,
@@ -50,7 +50,7 @@ export default async function run(casesDir: string, options: RunCliOptions) {
     all: 0,
     pass: 0,
     fail: 0,
-    testInfos: []
+    testInfos: [],
   }
 
   runner.on('testEnd', data => {
@@ -64,21 +64,23 @@ export default async function run(casesDir: string, options: RunCliOptions) {
     testCollectInfo.all++
   })
 
-  const fileList = glob.sync(globPath, { cwd: casesDir }).map(file => join(file, '..')).sort((a, b) => {
+  const fileList = glob
+    .sync(globPath, { cwd: casesDir })
+    .map(file => join(file, '..'))
+    .sort((a, b) => {
+      if (a.includes(loginCaseFileName)) {
+        return -1
+      }
 
-    if (a.includes(loginCaseFileName)) {
-      return -1
-    }
+      let aDir = a.match(/.+\\/)
+      let bDir = b.match(/.+\\/)
 
-    let aDir = a.match(/.+\\/)
-    let bDir = b.match(/.+\\/)
+      if (aDir && bDir && aDir[0] === bDir[0]) {
+        return Number(a.match(/\d+/)) - Number(b.match(/\d+/))
+      }
 
-    if (aDir && bDir && aDir[0] === bDir[0]) {
-      return Number(a.match(/\d+/)) - Number(b.match(/\d+/))
-    }
-
-    return 0
-  })
+      return 0
+    })
 
   if (fileList[0] && fileList[0].includes(loginCaseFileName)) {
     loginFileName = fileList[0]
@@ -93,7 +95,7 @@ export default async function run(casesDir: string, options: RunCliOptions) {
       console.log(chalk.red(`case ${fileName} run fail`))
       errorList.push(error as Error)
 
-      throw (error)
+      throw error
     }
   }
 
@@ -107,7 +109,11 @@ export default async function run(casesDir: string, options: RunCliOptions) {
 
     cpSync(reportWebDir, destReportWebDir, { recursive: true, force: true })
 
-    appendFileSync(reportWebHtml, `<script>\nwindow.wetestReportJson = ${JSON.stringify(testCollectInfo)};</script>`, 'utf-8')
+    appendFileSync(
+      reportWebHtml,
+      `<script>\nwindow.wetestReportJson = ${JSON.stringify(testCollectInfo)};</script>`,
+      'utf-8',
+    )
     writeFileSync(reportJSON, JSON.stringify(testCollectInfo))
 
     if (testCollectInfo.fail) {
@@ -128,7 +134,6 @@ export default async function run(casesDir: string, options: RunCliOptions) {
   }
 
   while (repeat) {
-
     let curIndex = 1
     let curCase = fileIter.next()
     while (!curCase.done) {
@@ -136,7 +141,6 @@ export default async function run(casesDir: string, options: RunCliOptions) {
         console.log(chalk.yellow(`progress：${curIndex} / ${fileList.length}：${curCase.value}`))
         await runCase(join(casesDir, curCase.value), curCase.value)
       } catch (error) {
-
         // 用户登录状态失效
         if (error instanceof Error && error.message === '[user-state-error]') {
           console.log(chalk.yellow('retry login...'))

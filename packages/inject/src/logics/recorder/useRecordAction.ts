@@ -1,4 +1,4 @@
-import { Action } from '@wetest/engine'
+import { Action } from '@idux/wetest-engine'
 import { Ref } from 'vue'
 import { ToolsStatus } from '../../types'
 
@@ -25,7 +25,7 @@ export function useRecordAction(toolsStatus: Ref<ToolsStatus>): {
         (preventedAction.action === action.action &&
           preventedAction.context === action.context &&
           preventedAction.page === action.page &&
-          preventedAction.params.selector === action.params.selector)  // todo: 选择器重构后  这里要看看怎么处理
+          preventedAction.params.selector === action.params.selector) // todo: 选择器重构后  这里要看看怎么处理
 
       if (preventCondition) {
         preventedAction = action

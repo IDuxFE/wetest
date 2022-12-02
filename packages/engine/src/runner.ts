@@ -9,14 +9,13 @@ import { MockProxy } from './mockProxy'
 import { RunnerConfig } from './types'
 import { O } from 'ts-toolbelt'
 import { join } from 'path'
-import { rmDir, writeJson } from '@wetest/share'
+import { rmDir, writeJson } from '@idux/wetest-share'
 import { existsSync } from 'fs'
 // import NetworkHelper from './utils/networkHelper'
 import TestInfoImpl from './utils/testInfoImpl'
 import { autoTrySelector } from './utils/common'
 import { Log } from './utils/log'
-import { setTestInfoImplState, getRunnerConfig, getTestInfoImplState } from '@wetest/share'
-
+import { setTestInfoImplState, getRunnerConfig, getTestInfoImplState } from '@idux/wetest-share'
 
 class Runner extends EventEmitter {
   private options: RunnerConfig = {
@@ -32,9 +31,9 @@ class Runner extends EventEmitter {
     reporter: {
       alwaysShowTracing: false,
 
-      tracingScreenshots: true
+      tracingScreenshots: true,
     },
-    userAgent: {}
+    userAgent: {},
   }
   private caseName: string = ''
   // private networkHelper: any
@@ -88,8 +87,10 @@ class Runner extends EventEmitter {
     }
   }
 
-  async stopTracing (testInfoImpl: TestInfoImpl) {
-    return await this.browserManager.stopTracing(join(this.options.traceDir, `${testInfoImpl.getTestInfo().testId}.zip`))
+  async stopTracing(testInfoImpl: TestInfoImpl) {
+    return await this.browserManager.stopTracing(
+      join(this.options.traceDir, `${testInfoImpl.getTestInfo().testId}.zip`),
+    )
   }
 
   async runCase(caseDir: string, fileName: string) {
@@ -114,9 +115,10 @@ class Runner extends EventEmitter {
         await this.runAction(action)
       } catch (error) {
         if (error instanceof Error) {
-
           if ((action as ManualAction).page && this.browserManager) {
-            const pageUrl = this.browserManager.getPage((action as ManualAction).context, (action as ManualAction).page).url()
+            const pageUrl = this.browserManager
+              .getPage((action as ManualAction).context, (action as ManualAction).page)
+              .url()
 
             if (!this.caseManager.case.loginCase && pageUrl === runnerConfig.loginUrl) {
               error.message = '[user-state-error]'
@@ -175,7 +177,11 @@ class Runner extends EventEmitter {
         contextParams.storageState = this.options.stateDir
       }
       const context = await this.browserManager.newContext(action.params.id, contextParams)
-      await this.browserManager.startTracing(context, { screenshots: this.options.reporter.tracingScreenshots, snapshots: true, title: this.caseName })
+      await this.browserManager.startTracing(context, {
+        screenshots: this.options.reporter.tracingScreenshots,
+        snapshots: true,
+        title: this.caseName,
+      })
       return
     }
 
@@ -226,9 +232,7 @@ class Runner extends EventEmitter {
     }
 
     if (action.action === 'saveStatus') {
-      const {
-        context: cxtId,
-      } = action
+      const { context: cxtId } = action
 
       const context = this.browserManager.getContext(cxtId)
       context.addCookies(this.options.cookies)
@@ -260,7 +264,18 @@ class Runner extends EventEmitter {
 
     if (action.action === 'click') {
       // 配置：https://playwright.dev/docs/api/class-page#page-click
-      const options = pick(action.params, ['button', 'clickCount', 'delay', 'force', 'modifiers', 'noWaitAfter', 'position', 'strict', 'timeout', 'trial'])
+      const options = pick(action.params, [
+        'button',
+        'clickCount',
+        'delay',
+        'force',
+        'modifiers',
+        'noWaitAfter',
+        'position',
+        'strict',
+        'timeout',
+        'trial',
+      ])
       const pageFn = (selector: string) => page.click(selector, options)
       actionPromise = () => autoTrySelector(pageFn, action.params.selector, page)
     }
@@ -296,7 +311,7 @@ class Runner extends EventEmitter {
     }
     await page.waitForTimeout(600)
     await page.waitForLoadState('networkidle', {
-      timeout: 30000
+      timeout: 30000,
     })
   }
 

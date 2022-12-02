@@ -1,5 +1,5 @@
-import { RecorderConfig, RunnerConfig } from '@wetest/engine'
-import { TestInfo } from '@wetest/engine/types/testInfo'
+import { RecorderConfig, RunnerConfig } from '@idux/wetest-engine'
+import { TestInfo } from '@idux/wetest-engine/types/testInfo'
 import { O } from 'ts-toolbelt'
 
 export interface ReporterConfig {
@@ -27,6 +27,5 @@ export interface TestCollectInfo {
   all: number
   testInfos: TestInfo[]
 }
-
 
 export type GlobalConfig = O.Partial<AllConfig, 'deep'>
