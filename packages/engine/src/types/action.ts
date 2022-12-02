@@ -1,11 +1,18 @@
 import type { Assertion } from './assertion'
 import type { Signal } from './signal'
-import { SelectorInfo } from '@wetest/ai-selector/types'
-
+import { SelectorInfo } from '@idux/wetest-ai-selector/types'
 
 export type Action = Assertion | BrowserAction | ManualAction
 
-export type ManualAction = ClickAction | MousemoveAction | HoverAction | WaitForTimeoutAction | PressAction | InputAction | ScrollAction | SaveStatusAction
+export type ManualAction =
+  | ClickAction
+  | MousemoveAction
+  | HoverAction
+  | WaitForTimeoutAction
+  | PressAction
+  | InputAction
+  | ScrollAction
+  | SaveStatusAction
 
 export type BrowserAction = NewContext | CloseContext | NewPage | ClosePage | ErrorAction
 
@@ -25,7 +32,18 @@ export interface BaseBrowserAction extends BaseAction {
 }
 
 export interface BaseManualAction extends BaseAction {
-  action: 'click' | 'dbClick' | 'hover' | 'waitForTimeout' | 'press' | 'input' | 'mousemove' | 'scroll' | 'assertion' | 'saveStatus' | 'wheel'
+  action:
+    | 'click'
+    | 'dbClick'
+    | 'hover'
+    | 'waitForTimeout'
+    | 'press'
+    | 'input'
+    | 'mousemove'
+    | 'scroll'
+    | 'assertion'
+    | 'saveStatus'
+    | 'wheel'
   context: string
   page: string
   screenShot?: string

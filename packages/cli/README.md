@@ -1,11 +1,11 @@
-# `@wetest/cli`
+# `@idux/wetest-cli`
 
 > TODO: description
 
 ## Usage
 
 ```
-const cli = require('@wetest/cli');
+const cli = require('@idux/wetest-cli');
 
 // TODO: DEMONSTRATE API
 ```

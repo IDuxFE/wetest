@@ -1,5 +1,5 @@
 import { Action, Case } from '.'
-import { wetestCfg } from '@wetest/inject'
+import { wetestCfg } from '@idux/wetest-inject'
 
 /**
  * engine提供给inject使用的api
@@ -12,12 +12,12 @@ export interface EngineApis {
   __wetest_pageId: string
   __wetest_cfg: wetestCfg
 
- /**
+  /**
    * 初始化web wetest配置
    *
    * @memberof EngineApis
    */
-  __wetest_getwetestCfg(): wetestCfg 
+  __wetest_getwetestCfg(): wetestCfg
 
   /**
    * 判断是否录制中
@@ -42,7 +42,9 @@ export interface EngineApis {
    * @returns {*}  {('success' | 'exist' | 'fail')}
    * @memberof EngineApis
    */
-  __wetest_createCase(caseInfo: Pick<Case, 'name' | 'origin' | 'saveMock' | 'loginCase' |'viewport'>): 'success' | 'exist' | 'fail'
+  __wetest_createCase(
+    caseInfo: Pick<Case, 'name' | 'origin' | 'saveMock' | 'loginCase' | 'viewport'>,
+  ): 'success' | 'exist' | 'fail'
 
   /**
    * 退出录制
@@ -109,5 +111,10 @@ export interface InjectApis {
    *   })} params
    * @memberof InjectApis
    */
-  __wetest_notice(params: { type: 'error' | 'success' | 'info'; title?: string; content: string; during?: number }): void
+  __wetest_notice(params: {
+    type: 'error' | 'success' | 'info'
+    title?: string
+    content: string
+    during?: number
+  }): void
 }

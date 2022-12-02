@@ -1,4 +1,4 @@
-import type { EngineApis, InjectApis } from '@wetest/engine'
+import type { EngineApis, InjectApis } from '@idux/wetest-engine'
 
 type PromisifyFunc<T extends (...args: any[]) => any> = (...args: Parameters<T>) => Promise<ReturnType<T>>
 

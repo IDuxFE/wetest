@@ -2,7 +2,7 @@ import { chromium, firefox, webkit, PageScreenshotOptions, Page, BrowserType } f
 import { BrowserName } from '../types'
 import pretty from 'pretty'
 import PageSelector from './pageSelector'
-import { SelectorInfo } from '@wetest/ai-selector'
+import { SelectorInfo } from '@idux/wetest-ai-selector'
 import { Log } from './log'
 
 export function getBrowser(browser: BrowserName): BrowserType {
@@ -107,8 +107,12 @@ export function sleep(timeout?: number) {
   return new Promise(resolve => setTimeout(resolve, timeout))
 }
 
-export async function autoTrySelector(fn: Function, selectorInfo: SelectorInfo, page: Page, allowFirstSelectorEmpty = false) {
-
+export async function autoTrySelector(
+  fn: Function,
+  selectorInfo: SelectorInfo,
+  page: Page,
+  allowFirstSelectorEmpty = false,
+) {
   let firstSelector = selectorInfo.firstSelector
 
   if (!firstSelector.length && !allowFirstSelectorEmpty) {
@@ -121,14 +125,14 @@ export async function autoTrySelector(fn: Function, selectorInfo: SelectorInfo, 
     throw new Error('[running]元素选择器缺失，请检查是否存在错误（改动引发）或者增加埋点属性后重新录制用例')
   }
 
-  return new Promise<any>(async (resolve, reject) => {
+  return new Promise<any>((resolve, reject) => {
     for (let i = 0; i < firstSelector.length; i++) {
       try {
         Log.runneSelectorLog(firstSelector[i], i + 1)
-        const result = await fn(firstSelector[i])
+        const result = fn(firstSelector[i])
         resolve(result)
         break
-      } catch(error) {
+      } catch (error) {
         if (i < firstSelector.length - 1) {
           continue
         }

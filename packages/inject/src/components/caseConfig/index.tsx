@@ -1,5 +1,5 @@
 import { NForm, NFormItem, NInput, NSwitch, NRadioGroup, NRadio } from 'naive-ui'
-import { Case } from '@wetest/engine'
+import { Case } from '@idux/wetest-engine'
 import { defineComponent, ref } from 'vue'
 import { func, object } from 'vue-types'
 

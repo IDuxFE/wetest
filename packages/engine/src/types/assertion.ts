@@ -1,7 +1,13 @@
 import { BaseManualAction } from './action'
-import { SelectorInfo } from '@wetest/ai-selector/types'
+import { SelectorInfo } from '@idux/wetest-ai-selector/types'
 
-export type Assertion = UrlAssertion | SnapshotAssertion | ScreenshotAssertion | VisibleAssertion | ValueAssertion | isCheckedAssertion
+export type Assertion =
+  | UrlAssertion
+  | SnapshotAssertion
+  | ScreenshotAssertion
+  | VisibleAssertion
+  | ValueAssertion
+  | isCheckedAssertion
 
 export interface BaseAssertion extends BaseManualAction {
   action: 'assertion'
@@ -48,7 +54,6 @@ export interface isCheckedAssertion extends BaseAssertion {
     checked: boolean
   }
 }
-
 
 export interface ScreenshotAssertion extends BaseAssertion {
   params: {

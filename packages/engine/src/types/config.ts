@@ -1,5 +1,5 @@
 import { Page, BrowserContext, ElementHandle } from 'playwright'
-import { SelectorCfg } from '@wetest/ai-selector'
+import { SelectorCfg } from '@idux/wetest-ai-selector'
 import { CaseManger } from '../caseManager'
 import { MockProxy } from '../mockProxy'
 

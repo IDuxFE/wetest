@@ -1,5 +1,5 @@
 import { computed, ComputedRef, Ref } from 'vue'
-import { Action } from '@wetest/engine'
+import { Action } from '@idux/wetest-engine'
 import { ToolInfo, ToolsStatus } from '../../types'
 import { getScreenshotAssertion, getUrlAssertion } from '../../utils/actionsFormatter'
 import { getDefaultToolsStatus } from './useToolbar'

@@ -1,7 +1,7 @@
-import { BrowserName, Recorder } from '@wetest/engine'
+import { BrowserName, Recorder } from '@idux/wetest-engine'
 import { Config } from './config'
 import { resolve } from 'path'
-import { setRecordConfig } from '@wetest/share'
+import { setRecordConfig } from '@idux/wetest-share'
 
 interface RecordCliOptions {
   output?: string

@@ -21,16 +21,16 @@
     "jsxFactory": "h",
     "noImplicitAny": false,
     "paths": {
-      "@wetest/engine": ["packages/engine/src"],
-      "@wetest/engine/*": ["packages/engine/src/*"],
-      "@wetest/ai-selector": ["packages/ai-selector/src"],
-      "@wetest/ai-selector/*": ["packages/ai-selector/src/*"],
-      "@wetest/inject": ["packages/inject/src"],
-      "@wetest/inject/*": ["packages/inject/src/*"],
-      "@wetest/share/*": ["packages/share/src/*"],
-      "@wetest/share": ["packages/share/src"],
-      "@wetest/cli": ["packages/cli/src"],
-      "@wetest/cli/*": ["packages/cli/src/*"]
+      "@idux/wetest-engine": ["packages/engine/src"],
+      "@idux/wetest-engine/*": ["packages/engine/src/*"],
+      "@idux/wetest-ai-selector": ["packages/ai-selector/src"],
+      "@idux/wetest-ai-selector/*": ["packages/ai-selector/src/*"],
+      "@idux/wetest-inject": ["packages/inject/src"],
+      "@idux/wetest-inject/*": ["packages/inject/src/*"],
+      "@idux/wetest-share/*": ["packages/share/src/*"],
+      "@idux/wetest-share": ["packages/share/src"],
+      "@idux/wetest-cli": ["packages/cli/src"],
+      "@idux/wetest-cli/*": ["packages/cli/src/*"]
     }
   },
   "exclude": ["**/node_modules/*", "**/dist/*", "packages/ai-selector/src/utils/*"]

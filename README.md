@@ -52,7 +52,7 @@ npm i -g playwright
 ```
 
 ```shell
-npm i -g @wetest/wetest
+npm i -g @idux/wetest-wetest
 
 ```
 
@@ -172,7 +172,7 @@ wetest执行完自动化用例后，会在__reporter__生成错误报告（单�
 ### 如何调试
 
 - 对于wetest工具层面层面的调试，在开启pnpm dev后（当然是已经pnpm link -g过了），强烈推荐使用visual studio code中terminal的JavaScript Debug terminal断点调试
-- 对于自动化报告应用，是独立的Vue单页应用，按照Vue应用调试即可，需要注意的是，自动化报告应用在构建后会复制到@wetest/wetest上，每次执行完用例后注入报告数据，所以如果报告应用要结合报告数据调试的话，目前只能执行完用例后在__reporter__上启动web服务查看，这点确实比较麻烦一些
+- 对于自动化报告应用，是独立的Vue单页应用，按照Vue应用调试即可，需要注意的是，自动化报告应用在构建后会复制到@idux/wetest-wetest上，每次执行完用例后注入报告数据，所以如果报告应用要结合报告数据调试的话，目前只能执行完用例后在__reporter__上启动web服务查看，这点确实比较麻烦一些
 
 ### 项目结构介绍
 

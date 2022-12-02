@@ -18,7 +18,7 @@ import chalk from 'chalk'
 import { writeFileSync, readFileSync, copyFileSync, rmSync } from 'fs'
 import { sleep } from './utils/common'
 import { autoTrySelector } from './utils/common'
-import { SelectorInfo } from '@wetest/ai-selector/types'
+import { SelectorInfo } from '@idux/wetest-ai-selector/types'
 
 const createDOMPurify = require('dompurify')
 const { JSDOM } = require('jsdom')

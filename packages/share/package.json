@@ -1,5 +1,5 @@
 {
-  "name": "@wetest/share",
+  "name": "@idux/wetest-share",
   "version": "0.0.1-beta",
   "description": "no code E2E test",
   "main": "dist/index.js",

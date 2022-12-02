@@ -1,5 +1,5 @@
-import { SelectorInfo as DomSelectorInfo } from '@wetest/ai-selector'
-import { SelectorCfg } from '@wetest/ai-selector'
+import { SelectorInfo as DomSelectorInfo } from '@idux/wetest-ai-selector'
+import { SelectorCfg } from '@idux/wetest-ai-selector'
 
 export interface ToolsStatus {
   recording: boolean
@@ -18,7 +18,7 @@ export interface ToolInfo {
   text?: string
   active: boolean
   disabled: boolean
-  hotKey?: string;
+  hotKey?: string
   handler?: ((event?: MouseEvent) => void | Promise<void>) | (() => void | Promise<void>)
   children?: ToolInfo[]
 }
@@ -35,8 +35,6 @@ export interface SelectorInfo {
   to?: HTMLElement | false
 }
 
-
 export interface wetestCfg {
   selectorCfg: SelectorCfg
 }
-

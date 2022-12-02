@@ -1,5 +1,5 @@
 {
-  "name": "@wetest/web",
+  "name": "@idux/wetest-web",
   "version": "0.0.1-beta",
   "scripts": {
     "dev": "vite",
