@@ -1,9 +1,16 @@
-import { chromium, firefox, webkit, PageScreenshotOptions, Page, BrowserType } from 'playwright'
-import { BrowserName } from '../types'
-import pretty from 'pretty'
-import PageSelector from './pageSelector'
-import { SelectorInfo } from '@idux/wetest-ai-selector'
-import { Log } from './log'
+import {
+  chromium,
+  firefox,
+  webkit,
+  PageScreenshotOptions,
+  Page,
+  BrowserType,
+} from "playwright"
+import { BrowserName } from "../types"
+import pretty from "pretty"
+import PageSelector from "./pageSelector"
+import { SelectorInfo } from "@idux/wetest-ai-selector"
+import { Log } from "./log"
 
 export function getBrowser(browser: BrowserName): BrowserType {
   return {
@@ -26,9 +33,9 @@ export function getBrowser(browser: BrowserName): BrowserType {
 export async function screenshot(
   page: Page,
   options: {
-    path: string
-    selector?: string
-  },
+    path: string;
+    selector?: string;
+  }
 ) {
   const screenshotParams: PageScreenshotOptions = {}
   if (options.selector) {
@@ -65,11 +72,13 @@ export async function getSnapshot(
     selector,
     filter = str => str,
   }: {
-    selector: string
-    filter?: (snap: string) => string
-  },
+    selector: string;
+    filter?: (snap: string) => string;
+  }
 ) {
-  const snapshot = await page.locator(selector).evaluate(node => node.outerHTML)
+  const snapshot = await page
+    .locator(selector)
+    .evaluate(node => node.outerHTML)
   return filter(pretty(snapshot))
 }
 
@@ -85,7 +94,7 @@ export async function getSnapshot(
  */
 export function deleteDeep(
   obj: Record<string, any>,
-  omitParams: RegExp | ((key: string, value: string) => boolean),
+  omitParams: RegExp | ((key: string, value: string) => boolean)
 ): Record<string, any> {
   const deleteFn = (key: string, val: any) => {
     if (omitParams instanceof RegExp) {
@@ -99,7 +108,7 @@ export function deleteDeep(
         return undefined
       }
       return value
-    }),
+    })
   )
 }
 
@@ -111,7 +120,7 @@ export async function autoTrySelector(
   fn: Function,
   selectorInfo: SelectorInfo,
   page: Page,
-  allowFirstSelectorEmpty = false,
+  allowFirstSelectorEmpty = false
 ) {
   let firstSelector = selectorInfo.firstSelector
 
@@ -122,7 +131,9 @@ export async function autoTrySelector(
   }
 
   if (!firstSelector.length) {
-    throw new Error('[running]元素选择器缺失，请检查是否存在错误（改动引发）或者增加埋点属性后重新录制用例')
+    throw new Error(
+      "[running]元素选择器缺失，请检查是否存在错误（改动引发）或者增加埋点属性后重新录制用例"
+    )
   }
 
   return new Promise<any>((resolve, reject) => {
