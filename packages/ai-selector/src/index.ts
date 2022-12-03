@@ -1,37 +1,42 @@
-import { getDefaultSelectorCfg } from './utils/util'
-import { SelectorInfo, SelectorMap, LevelSelectorMap, SelectorCfg } from './types'
-import { ATTR_ARRAY, ATTR_MAP } from './const'
-import { Selector } from './utils/selector/selector'
-import { merge } from 'lodash'
+import { getDefaultSelectorCfg } from "./utils/util"
+import {
+  SelectorInfo,
+  SelectorMap,
+  LevelSelectorMap,
+  SelectorCfg,
+} from "./types"
+import { ATTR_ARRAY, ATTR_MAP } from "./const"
+import { Selector } from "./utils/selector/selector"
+import { merge } from "lodash"
 
-export * from './types'
+export * from "./types"
 
 interface Options {
-  selectorInfo?: SelectorInfo
-  selectorCfg: SelectorCfg
+  selectorInfo?: SelectorInfo;
+  selectorCfg: SelectorCfg;
 }
 
 interface RecursionOptions {
-  maxLevel: number
-  el: Element
+  maxLevel: number;
+  el: Element;
 }
 
 export default class DomSelector {
-  private curLevelKey: number
+  private curLevelKey: number;
 
-  private level: number
+  private level: number;
 
-  private selector: Selector
+  private selector: Selector;
 
-  private maxKeyNum: number
+  private maxKeyNum: number;
 
-  private recursionMaxLevel: number
+  private recursionMaxLevel: number;
 
-  private selectorInfo: SelectorInfo
+  private selectorInfo: SelectorInfo;
 
-  private targetDirectSelectorMap = {}
+  private targetDirectSelectorMap = {};
 
-  private selectorCfg: SelectorCfg = getDefaultSelectorCfg()
+  private selectorCfg: SelectorCfg = getDefaultSelectorCfg();
 
   constructor(options: Options) {
     this.curLevelKey = 0
@@ -93,7 +98,10 @@ export default class DomSelector {
 
   private checkSelectorHealthy(targetDirectSelector) {
     // 判断选择器是否健康，防止因为因为第一层的选择器太强大导致firstselector都包含同一个第一层选择器
-    if (this.targetDirectSelectorMap[targetDirectSelector] && this.targetDirectSelectorMap[targetDirectSelector] > 1) {
+    if (
+      this.targetDirectSelectorMap[targetDirectSelector] &&
+      this.targetDirectSelectorMap[targetDirectSelector] > 1
+    ) {
       return false
     }
 
@@ -106,9 +114,12 @@ export default class DomSelector {
     level: number,
     selector: string,
     options: RecursionOptions,
-    targetDirectSelector: string,
+    targetDirectSelector: string
   ) {
-    if (this.selectorInfo.firstSelector.length > 2 || level > options.maxLevel) {
+    if (
+      this.selectorInfo.firstSelector.length > 2 ||
+      level > options.maxLevel
+    ) {
       return
     }
 
@@ -133,7 +144,9 @@ export default class DomSelector {
     // 先遍历当前selectorMap iterator，快速找到唯一目标的selector，非唯一的存入JumpItem，后续再遍历与递归，加快算法效率
     while (curSelector) {
       curSelector = `${curSelector} >> visible = true`
-      let unionselector = selector ? `${curSelector} >> ${selector}` : curSelector
+      let unionselector = selector
+        ? `${curSelector} >> ${selector}`
+        : curSelector
 
       let curSelectorEles: Element[] = []
       try {
@@ -143,7 +156,7 @@ export default class DomSelector {
       }
 
       // 如果当前层级的选择此是nth的，不能直接作为最终唯一匹配选择器，需要向上查找（也就是最终的结果，开头的元素选择器不能是nth的）
-      if (curSelector.includes('nth=') || curSelectorEles.length > 1) {
+      if (curSelector.includes("nth=") || curSelectorEles.length > 1) {
         iterator.saveJumpItem()
         curSelector = iterator.next()
         continue
@@ -192,13 +205,21 @@ export default class DomSelector {
 
     while (curSelector) {
       curSelector = `${curSelector} >> visible = true`
-      let unionselector = selector ? `${curSelector} >> ${selector}` : curSelector
+      let unionselector = selector
+        ? `${curSelector} >> ${selector}`
+        : curSelector
 
       if (level === 0) {
         targetDirectSelector = curSelector
       }
 
-      this.recursionMathEl(levelSelectorMap, level + 1, unionselector, options, targetDirectSelector)
+      this.recursionMathEl(
+        levelSelectorMap,
+        level + 1,
+        unionselector,
+        options,
+        targetDirectSelector
+      )
 
       curSelector = iterator.jumpNext()
     }
@@ -224,7 +245,7 @@ export default class DomSelector {
 
   public getElementText(el: Element) {
     return el.textContent
-      ?.split('\n')
+      ?.split("\n")
       .map(text => text.trim())
       .filter(text => !!text)
   }
@@ -251,16 +272,19 @@ export default class DomSelector {
     this.recursionMathEl(
       this.selectorInfo.levelSelectorMap,
       0,
-      '',
+      "",
       {
         maxLevel: this.recursionMaxLevel,
         el: el,
       },
-      '',
+      ""
     )
   }
 
-  private generateLevelMap(val: string | string[], options = { isNextLevel: false }) {
+  private generateLevelMap(
+    val: string | string[],
+    options = { isNextLevel: false }
+  ) {
     let curLevelMap = this.getCurrentLevelMap()
 
     if (options.isNextLevel) {
@@ -325,7 +349,9 @@ export default class DomSelector {
     }
 
     return attributeArr.map(attr => {
-      let selector = `${el.tagName.toLocaleLowerCase()}[${attr}="${el.getAttribute(attr)}"]`
+      let selector = `${el.tagName.toLocaleLowerCase()}[${attr}="${el.getAttribute(
+        attr
+      )}"]`
 
       return this.combineWithNth(selector, el)
     })
@@ -333,11 +359,16 @@ export default class DomSelector {
 
   // 这里还是要优化一下，不能一味class全部拼接，会降低可用性，每个class都应该是作为当前元素的一个selector
   private processElementClass(el: Element) {
-    let classArr = el.className
+    let classArr = el.classList
+      .toString()
       .trim()
       .split(/\s+/)
-      .filter(cla => !this.selectorCfg.excludeClass.includes(cla) && !this.selectorCfg.excludeClassModify.test(cla))
-    let selector = `.${classArr.join('.')}`
+      .filter(
+        cla =>
+          !this.selectorCfg.excludeClass.includes(cla) &&
+          !this.selectorCfg.excludeClassModify.test(cla)
+      )
+    let selector = `.${classArr.join(".")}`
 
     return this.combineWithNth(selector, el)
   }
@@ -350,15 +381,20 @@ export default class DomSelector {
 
   private processBuryingPoint(el: Element) {
     const attr = this.selectorCfg.buryingPoint
-    return `${el.tagName.toLocaleLowerCase()}[${attr}="${el.getAttribute(attr)}"]`
+    return `${el.tagName.toLocaleLowerCase()}[${attr}="${el.getAttribute(
+      attr
+    )}"]`
   }
 
   private isAccessId(v) {
     return !this.selectorCfg.excludeIdByVal.test(v)
   }
 
-  public generateSelectMap(el: Element | null, options = { includeTextSelector: true }) {
-    if (el && el.tagName.toLocaleLowerCase() !== 'html') {
+  public generateSelectMap(
+    el: Element | null,
+    options = { includeTextSelector: true }
+  ) {
+    if (el && el.tagName.toLocaleLowerCase() !== "html") {
       this.beforeCurRecursion()
 
       // 配置的埋点属性，就以生成的埋点属性为先
@@ -378,12 +414,16 @@ export default class DomSelector {
 
       // 摘选的元素属性（需要包含tagetname）
       if (el.attributes.length) {
-        this.generateLevelMap(this.processElementAttr(el), { isNextLevel: true })
+        this.generateLevelMap(this.processElementAttr(el), {
+          isNextLevel: true,
+        })
       }
 
       // class
-      if (el.className) {
-        this.generateLevelMap(this.processElementClass(el), { isNextLevel: true })
+      if (el.classList.toString()) {
+        this.generateLevelMap(this.processElementClass(el), {
+          isNextLevel: true,
+        })
       }
 
       // tag (真的啥都没有的话，只能匹配tag)
@@ -394,7 +434,10 @@ export default class DomSelector {
     }
   }
 
-  public getDomSelectorInfo(el: Element, options = { includeTextSelector: true }) {
+  public getDomSelectorInfo(
+    el: Element,
+    options = { includeTextSelector: true }
+  ) {
     this.generateSelectMap(el, options)
     this.afterAction(el)
 
