@@ -52,7 +52,7 @@ npm i -g playwright
 ```
 
 ```shell
-npm i -g @idux/wetest-wetest
+npm i -g @idux/wetest-cli
 
 ```
 
