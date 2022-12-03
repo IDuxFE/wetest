@@ -333,7 +333,8 @@ export default class DomSelector {
 
   // 这里还是要优化一下，不能一味class全部拼接，会降低可用性，每个class都应该是作为当前元素的一个selector
   private processElementClass(el: Element) {
-    let classArr = el.className
+    let classArr = el.classList
+      .toString()
       .trim()
       .split(/\s+/)
       .filter(cla => !this.selectorCfg.excludeClass.includes(cla) && !this.selectorCfg.excludeClassModify.test(cla))
@@ -382,7 +383,7 @@ export default class DomSelector {
       }
 
       // class
-      if (el.className) {
+      if (el.classList.toString()) {
         this.generateLevelMap(this.processElementClass(el), { isNextLevel: true })
       }
 

@@ -125,19 +125,17 @@ export async function autoTrySelector(
     throw new Error('[running]元素选择器缺失，请检查是否存在错误（改动引发）或者增加埋点属性后重新录制用例')
   }
 
-  return new Promise<any>((resolve, reject) => {
-    for (let i = 0; i < firstSelector.length; i++) {
-      try {
-        Log.runneSelectorLog(firstSelector[i], i + 1)
-        const result = fn(firstSelector[i])
-        resolve(result)
-        break
-      } catch (error) {
-        if (i < firstSelector.length - 1) {
-          continue
-        }
-        reject(error)
+  for (let i = 0; i < firstSelector.length; i++) {
+    try {
+      Log.runneSelectorLog(firstSelector[i], i + 1)
+      const result = await fn(firstSelector[i])
+      return result
+    } catch (error) {
+      if (i < firstSelector.length - 1) {
+        continue
       }
+
+      throw error
     }
-  })
+  }
 }
