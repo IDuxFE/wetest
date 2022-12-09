@@ -1,6 +1,6 @@
 {
   "name": "@idux/wetest-inject",
-  "version": "0.0.2-beta.0",
+  "version": "0.0.3-beta.0",
   "description": "no code E2E test",
   "types": "dist/index.d.ts",
   "publishConfig": {
