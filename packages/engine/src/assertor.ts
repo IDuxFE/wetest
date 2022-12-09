@@ -129,7 +129,7 @@ export class Assertor {
   }
 
   /**
-   * 断言
+   * 断言,录制的时候，部分断言需要跑一遍获取对应的断言值得
    *
    * @param {Assertion} assertion
    * @param {Page} page
@@ -137,12 +137,10 @@ export class Assertor {
    */
   async assert(assertion: Assertion, page: Page) {
     switch (assertion.params.type) {
-      case 'url':
-        await this.runUrlAssertion(assertion as UrlAssertion, page)
-        break
       case 'snapshot':
         await this.assertSnapshot(assertion as SnapshotAssertion, page)
         break
+
       case 'screenshot':
         await this.assertScreenshot(assertion as ScreenshotAssertion, page)
         break
