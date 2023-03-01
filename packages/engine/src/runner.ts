@@ -34,6 +34,7 @@ class Runner extends EventEmitter {
       tracingScreenshots: true,
     },
     userAgent: {},
+    timeout: 30000,
   }
   private caseName: string = ''
   // private networkHelper: any
@@ -227,7 +228,7 @@ class Runner extends EventEmitter {
         waitUntil: 'load',
       })
       await page.waitForLoadState('networkidle')
-      page.setDefaultTimeout(8000)
+      page.setDefaultTimeout(this.options.timeout)
       return
     }
 

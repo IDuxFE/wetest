@@ -191,6 +191,13 @@ export type RunnerConfig = CommonConfig & {
   cookies: Cookies[]
 
   /**
+   * 回放时往系统中添加自定义 cookies
+   *
+   * @type {string}
+   */
+  timeout: number
+
+  /**
    * 系统登录页地址
    *
    * @type {string}
