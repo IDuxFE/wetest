@@ -227,7 +227,9 @@ class Runner extends EventEmitter {
       await page.goto(newUrl, {
         waitUntil: 'load',
       })
-      await page.waitForLoadState('networkidle')
+      await page.waitForLoadState('networkidle', {
+        timeout: this.options.timeout,
+      })
       page.setDefaultTimeout(this.options.timeout)
       return
     }
@@ -312,7 +314,7 @@ class Runner extends EventEmitter {
     }
     await page.waitForTimeout(600)
     await page.waitForLoadState('networkidle', {
-      timeout: 30000,
+      timeout: this.options.timeout,
     })
   }
 
