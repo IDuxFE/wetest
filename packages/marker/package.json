@@ -1,6 +1,6 @@
 {
   "name": "@idux/wetest-marker",
-  "version": "0.0.3-beta.0",
+  "version": "0.0.4-beta.0",
   "description": "no code E2E test",
   "publishConfig": {
     "access": "public"
