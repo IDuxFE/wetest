@@ -1,6 +1,6 @@
 {
   "name": "@idux/wetest-ai-selector",
-  "version": "0.0.4-beta.0",
+  "version": "0.0.5-beta.0",
   "description": "no code E2E test",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
