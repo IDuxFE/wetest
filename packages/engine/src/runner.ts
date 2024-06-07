@@ -16,6 +16,7 @@ import TestInfoImpl from './utils/testInfoImpl'
 import { autoTrySelector } from './utils/common'
 import { Log } from './utils/log'
 import { setTestInfoImplState, getRunnerConfig, getTestInfoImplState } from '@idux/wetest-share'
+import dayjs from 'dayjs'
 
 class Runner extends EventEmitter {
   private options: RunnerConfig = {
@@ -37,6 +38,7 @@ class Runner extends EventEmitter {
     timeout: 30000,
   }
   private caseName: string = ''
+  private traceMap = new Map()
   // private networkHelper: any
   private browserManager!: BrowserManger
   private caseManager!: CaseManger
@@ -111,6 +113,7 @@ class Runner extends EventEmitter {
     setTestInfoImplState(testInfoImpl)
     for (let index = 0; index < this.caseManager.case.actions.length; index++) {
       const action = this.caseManager.case.actions[index]
+      const startTime = Date.now()
 
       try {
         await this.runAction(action)
@@ -133,9 +136,23 @@ class Runner extends EventEmitter {
             {
               action,
               message: error.message,
+              cause: [...this.traceMap.keys()],
             },
             join(errorsDir, 'error.log'),
           )
+
+          if (error.message.includes('waitForLoadState') && error.message.includes('Timeout')) {
+            ;[...this.traceMap.keys()].forEach(item => {
+              testInfoImpl.addStep({
+                stepId: 'pw:timeout@1',
+                title: '资源加载超时',
+                startTime,
+                endTime: Date.now(),
+                error: `[${dayjs(startTime).format('YYYY-MM-DD HH:mm:ss')}] 等待超时： ${item}`,
+                status: 'fail',
+              })
+            })
+          }
 
           await this.stopTracing(testInfoImpl)
           testInfoImpl.complete('fail')
@@ -211,6 +228,16 @@ class Runner extends EventEmitter {
       } = action
       const context = this.browserManager.getContext(cxtId)
       const page = await context.newPage()
+
+      page.on('request', interceptedRequest => {
+        const url = interceptedRequest.url()
+        this.traceMap.set(url, interceptedRequest)
+      })
+
+      page.on('requestfinished', interceptedRequest => {
+        const url = interceptedRequest.url()
+        this.traceMap.delete(url)
+      })
 
       if (runnerConfig.abortUrl) {
         await page.route(runnerConfig.abortUrl, route => {
