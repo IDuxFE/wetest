@@ -1,4 +1,4 @@
-import { Page, BrowserContext, ElementHandle } from 'playwright'
+import { Page, BrowserContext, ElementHandle, LaunchOptions } from 'playwright'
 import { SelectorCfg } from '@idux/wetest-ai-selector'
 import { CaseManger } from '../caseManager'
 import { MockProxy } from '../mockProxy'
@@ -245,6 +245,13 @@ export type RunnerConfig = CommonConfig & {
      * @type {boolean}
      */
     headless: boolean
+
+    /**
+     * 浏览器启动参数
+     *
+     * @type {LaunchOptions}
+     */
+    launchOptions?: LaunchOptions
   }
 
   /**

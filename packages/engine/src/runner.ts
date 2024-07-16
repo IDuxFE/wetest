@@ -27,6 +27,7 @@ class Runner extends EventEmitter {
     browser: {
       type: 'chromium',
       headless: true,
+      launchOptions: {},
     },
     reporter: {
       alwaysShowTracing: false,
@@ -50,6 +51,7 @@ class Runner extends EventEmitter {
     if (!this.browserManager) {
       this.browserManager = new BrowserManger()
       await this.browserManager.launch(this.options.browser.type, {
+        ...this.options.browser.launchOptions,
         headless: this.options.browser.headless,
         slowMo: this.options.actionInterval,
       })
