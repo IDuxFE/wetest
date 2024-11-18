@@ -24,7 +24,7 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@ls-lint/ls-lint": "^1.10.0",
-    "@playwright/test": "1.25.2",
+    "@playwright/test": "1.32.3",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.0.0",

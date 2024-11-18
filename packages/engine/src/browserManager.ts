@@ -35,7 +35,7 @@ export class BrowserManger extends EventEmitter {
     let stepIndex = 0
     const createInstrumentationListener = () => {
       return {
-        onApiCallBegin: (apiCall, stackTrace, userData) => {
+        onApiCallBegin: (apiCall, stackTrace, id, userData) => {
           // playwright api开始监听器
           const stepId = `pw:api@${apiCall}@${stepIndex++}`
 
