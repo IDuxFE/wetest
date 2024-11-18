@@ -52,7 +52,7 @@
     "fast-glob": "^3.2.11",
     "lodash": "^4.17.21",
     "ora": "^6.0.1",
-    "playwright-core": "1.25.2",
+    "playwright-core": "1.32.3",
     "ts-toolbelt": "^9.6.0"
   },
   "devDependencies": {
