@@ -13,6 +13,7 @@ export type ManualAction =
   | InputAction
   | ScrollAction
   | SaveStatusAction
+  | SmsCodeAction
 
 export type BrowserAction = NewContext | CloseContext | NewPage | ClosePage | ErrorAction
 
@@ -37,6 +38,7 @@ export interface BaseManualAction extends BaseAction {
     | 'dbClick'
     | 'hover'
     | 'waitForTimeout'
+    | 'smsCode'
     | 'press'
     | 'input'
     | 'mousemove'
@@ -120,6 +122,26 @@ export interface WaitForTimeoutAction extends BaseManualAction {
     time: number
   }
 }
+
+export interface SmsCodeAction extends BaseManualAction {
+  action: 'smsCode'
+  params: {
+    phone: string
+    smsId: string
+    addr: string
+    token: string
+    retryTimes: number
+  }
+}
+
+export interface SmsCodeReqRsp {
+  code: number
+  data: {
+    phone: string
+    code: string
+  }
+}
+
 export interface PressAction extends BaseManualAction {
   action: 'press'
   params: {

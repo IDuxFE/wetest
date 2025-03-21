@@ -29,6 +29,7 @@ importers:
       '@vue/runtime-core': ^3.2.12
       '@vue/runtime-dom': ^3.2.12
       '@vueuse/core': ^9.2.0
+      axios: ^1.8.4
       chalk: ^4.1.1
       eslint: ^7.31.0
       eslint-config-prettier: ^8.3.0
@@ -65,6 +66,8 @@ importers:
       vite: 2.8.4
       vue: 3.2.31
       vue-tsc: 0.2.3
+    dependencies:
+      axios: 1.8.4
     devDependencies:
       '@babel/core': 7.17.5
       '@commitlint/cli': 12.1.4
@@ -139,7 +142,7 @@ importers:
   packages/cli:
     specifiers:
       '@endemolshinegroup/cosmiconfig-typescript-loader': ^3.0.2
-      '@idux/wetest-engine': ^0.0.6-beta.0
+      '@idux/wetest-engine': ^0.1.0
       '@idux/wetest-share': ^0.0.5-beta.0
       '@rollup/plugin-commonjs': ^20.0.0
       '@types/liftoff': ^4.0.0
@@ -154,14 +157,14 @@ importers:
       playwright-core: 1.32.3
       ts-toolbelt: ^9.6.0
     dependencies:
-      '@endemolshinegroup/cosmiconfig-typescript-loader': 3.0.2_4hb3nbpyw5ug3teilibp2fgf6a
+      '@endemolshinegroup/cosmiconfig-typescript-loader': 3.0.2_cosmiconfig@7.0.1
       '@idux/wetest-engine': link:../engine
       '@idux/wetest-share': link:../share
-      '@rollup/plugin-commonjs': 20.0.0_rollup@2.68.0
+      '@rollup/plugin-commonjs': 20.0.0
       chalk: 4.1.2
       commander: 8.3.0
       cosmiconfig: 7.0.1
-      cosmiconfig-ts-loader: 0.1.1_4hb3nbpyw5ug3teilibp2fgf6a
+      cosmiconfig-ts-loader: 0.1.1_cosmiconfig@7.0.1
       dayjs: 1.10.7
       fast-glob: 3.2.11
       lodash: 4.17.21
@@ -228,10 +231,10 @@ importers:
     devDependencies:
       css-selector-generator: 3.5.4
       dayjs: 1.10.7
-      naive-ui: 2.34.2_vue@3.2.31
+      naive-ui: 2.34.2
       ts-toolbelt: 9.6.0
       vue-shadow-dom: 4.0.0
-      vue-types: 4.1.1_vue@3.2.31
+      vue-types: 4.1.1
 
   packages/marker:
     specifiers: {}
@@ -947,12 +950,10 @@ packages:
       css-render: 0.15.14
     dev: true
 
-  /@css-render/vue3-ssr/0.15.11_vue@3.2.31:
+  /@css-render/vue3-ssr/0.15.11:
     resolution: {integrity: sha512-n+SuqLPbY30FUTM8slX75OaEG+c8XlTOFrAklekX2XQGvBbz9XdBE6hTEgGlV5kPcTMqTJeCG7Vzhs9/29VC7w==}
     peerDependencies:
       vue: ^3.0.11
-    dependencies:
-      vue: 3.2.31
     dev: true
 
   /@css-render/vue3-ssr/0.15.14_vue@3.2.31:
@@ -983,7 +984,7 @@ packages:
     resolution: {integrity: sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==}
     dev: true
 
-  /@endemolshinegroup/cosmiconfig-typescript-loader/3.0.2_4hb3nbpyw5ug3teilibp2fgf6a:
+  /@endemolshinegroup/cosmiconfig-typescript-loader/3.0.2_cosmiconfig@7.0.1:
     resolution: {integrity: sha1-7qRjWCjd43KDiwkJaT69mq/uwi0=, tarball: '@endemolshinegroup/cosmiconfig-typescript-loader/download/@endemolshinegroup/cosmiconfig-typescript-loader-3.0.2.tgz'}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -992,7 +993,7 @@ packages:
       cosmiconfig: 7.0.1
       lodash.get: 4.4.2
       make-error: 1.3.6
-      ts-node: 9.1.1_typescript@4.5.5
+      ts-node: 9.1.1
       tslib: 2.3.1
     transitivePeerDependencies:
       - typescript
@@ -2028,6 +2029,21 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /@rollup/plugin-commonjs/20.0.0:
+    resolution: {integrity: sha1-MkaHLcvLGKVKqmJ3qMfX8bFVt0U=, tarball: '@rollup/plugin-commonjs/download/@rollup/plugin-commonjs-20.0.0.tgz'}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^2.38.3
+    dependencies:
+      '@rollup/pluginutils': 3.1.0
+      commondir: 1.0.1
+      estree-walker: 2.0.2
+      glob: 7.2.0
+      is-reference: 1.2.1
+      magic-string: 0.25.7
+      resolve: 1.22.0
+    dev: false
+
   /@rollup/plugin-commonjs/20.0.0_rollup@2.68.0:
     resolution: {integrity: sha1-MkaHLcvLGKVKqmJ3qMfX8bFVt0U=, tarball: '@rollup/plugin-commonjs/download/@rollup/plugin-commonjs-20.0.0.tgz'}
     engines: {node: '>= 8.0.0'}
@@ -2042,6 +2058,7 @@ packages:
       magic-string: 0.25.7
       resolve: 1.22.0
       rollup: 2.68.0
+    dev: true
 
   /@rollup/plugin-json/4.1.0_rollup@2.68.0:
     resolution: {integrity: sha1-VOCYZ65pY8WThE2L16nHGClElvM=, tarball: '@rollup/plugin-json/download/@rollup/plugin-json-4.1.0.tgz'}
@@ -2077,6 +2094,17 @@ packages:
       rollup: 2.68.0
     dev: true
 
+  /@rollup/pluginutils/3.1.0:
+    resolution: {integrity: sha1-cGtFJO5tyLEDs8mVUz5a1oDAK5s=, tarball: '@rollup/pluginutils/download/@rollup/pluginutils-3.1.0.tgz'}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      '@types/estree': 0.0.39
+      estree-walker: 1.0.1
+      picomatch: 2.3.1
+    dev: false
+
   /@rollup/pluginutils/3.1.0_rollup@2.68.0:
     resolution: {integrity: sha1-cGtFJO5tyLEDs8mVUz5a1oDAK5s=, tarball: '@rollup/pluginutils/download/@rollup/pluginutils-3.1.0.tgz'}
     engines: {node: '>= 8.0.0'}
@@ -2087,6 +2115,7 @@ packages:
       estree-walker: 1.0.1
       picomatch: 2.3.1
       rollup: 2.68.0
+    dev: true
 
   /@rollup/pluginutils/4.1.2:
     resolution: {integrity: sha512-ROn4qvkxP9SyPeHaf7uQC/GPFY6L/OWy9+bd9AwcjOAWQwxRscoEyAUD8qCY5o5iL4jqQwoLk2kaTKJPb/HwzQ==}
@@ -2968,6 +2997,16 @@ packages:
     resolution: {integrity: sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==}
     dev: true
 
+  /axios/1.8.4:
+    resolution: {integrity: sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==}
+    dependencies:
+      follow-redirects: 1.15.9
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /babel-runtime/6.26.0:
     resolution: {integrity: sha512-ITKNuq2wKlW1fJg9sSW52eepoYgZBggvOAHC0u/CYu/qxQ9EVzThCgR69BnSXLHjy2f7SY5zaQ4yt7H9ZVxY2g==}
     dependencies:
@@ -3531,7 +3570,7 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
-  /cosmiconfig-ts-loader/0.1.1_4hb3nbpyw5ug3teilibp2fgf6a:
+  /cosmiconfig-ts-loader/0.1.1_cosmiconfig@7.0.1:
     resolution: {integrity: sha1-gJ2lb7GohiufkoBNc2tod6NPRYk=, tarball: cosmiconfig-ts-loader/download/cosmiconfig-ts-loader-0.1.1.tgz}
     engines: {node: '>=10'}
     peerDependencies:
@@ -3541,7 +3580,7 @@ packages:
       lodash: 4.17.21
       lodash-es: 4.17.21
       make-error: 1.3.6
-      ts-node: 9.1.1_typescript@4.5.5
+      ts-node: 9.1.1
     transitivePeerDependencies:
       - typescript
     dev: false
@@ -4989,6 +5028,16 @@ packages:
     resolution: {integrity: sha1-dshYT0/IQ9tkcCpr0Eq3qL1mbaM=, tarball: flatted/download/flatted-3.2.5.tgz}
     dev: true
 
+  /follow-redirects/1.15.9:
+    resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
   /forever-agent/0.6.1:
     resolution: {integrity: sha512-j0KLYPhm6zeac4lz3oJ3o65qvgQCcPubiyotZrXqEaG4hNagNYO8qdlUrX5vwqv9ohqeT/Z3j6+yW067yWWdUw==}
     dev: true
@@ -5061,6 +5110,7 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
+    dev: true
     optional: true
 
   /function-bind/1.1.1:
@@ -6665,13 +6715,13 @@ packages:
     resolution: {integrity: sha1-FjDEKyJR/4HiooPelqVJfqkuXg0=, tarball: mute-stream/download/mute-stream-0.0.8.tgz}
     dev: true
 
-  /naive-ui/2.34.2_vue@3.2.31:
+  /naive-ui/2.34.2:
     resolution: {integrity: sha512-JyvtVqHzS0O0DyPFFg95cJW0fp2WCEPsjXbeplkxFIfJHCgp5KC75PjnBycryegjPiZNLn9WlRDxXU5emEqRfg==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
       '@css-render/plugin-bem': 0.15.11_css-render@0.15.11
-      '@css-render/vue3-ssr': 0.15.11_vue@3.2.31
+      '@css-render/vue3-ssr': 0.15.11
       '@types/katex': 0.14.0
       '@types/lodash': 4.14.191
       '@types/lodash-es': 4.17.6
@@ -6685,10 +6735,9 @@ packages:
       lodash-es: 4.17.21
       seemly: 0.3.6
       treemate: 0.3.11
-      vdirs: 0.1.8_vue@3.2.31
-      vooks: 0.2.12_vue@3.2.31
-      vue: 3.2.31
-      vueuc: 0.4.49_vue@3.2.31
+      vdirs: 0.1.8
+      vooks: 0.2.12
+      vueuc: 0.4.49
     dev: true
 
   /naive-ui/2.38.2_vue@3.2.31:
@@ -7878,6 +7927,10 @@ packages:
     resolution: {integrity: sha1-SO6i2PWNlkSkoyyq5dXbKQoHXOg=, tarball: protocols/download/protocols-1.4.8.tgz}
     dev: true
 
+  /proxy-from-env/1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
+    dev: false
+
   /prr/1.0.1:
     resolution: {integrity: sha1-0/wRS6BplaRexok/SEzrHXj19HY=, tarball: prr/download/prr-1.0.1.tgz}
     dev: true
@@ -8474,6 +8527,7 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
 
   /rollup/2.78.1:
     resolution: {integrity: sha512-VeeCgtGi4P+o9hIg+xz4qQpRl6R401LWEXBmxYKOV4zlF82lyhgh2hTZnheFUbANE8l2A41F458iwj2vEYaXJg==}
@@ -9166,7 +9220,7 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-node/9.1.1_typescript@4.5.5:
+  /ts-node/9.1.1:
     resolution: {integrity: sha1-UamkUKPpWUAb2l8ASnLVS5NtN20=, tarball: ts-node/download/ts-node-9.1.1.tgz}
     engines: {node: '>=10.0.0'}
     hasBin: true
@@ -9178,7 +9232,6 @@ packages:
       diff: 4.0.2
       make-error: 1.3.6
       source-map-support: 0.5.21
-      typescript: 4.5.5
       yn: 3.1.1
     dev: false
 
@@ -9301,6 +9354,7 @@ packages:
     resolution: {integrity: sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /uglify-js/3.15.1:
     resolution: {integrity: sha512-FAGKF12fWdkpvNJZENacOH0e/83eG6JyVQyanIJaBXCN1J11TUQv1T1/z8S+Z0CG0ZPk1nPcreF/c7lrTd0TEQ==}
@@ -9433,6 +9487,14 @@ packages:
       builtins: 1.0.3
     dev: true
 
+  /vdirs/0.1.8:
+    resolution: {integrity: sha512-H9V1zGRLQZg9b+GdMk8MXDN2Lva0zx72MPahDKc30v+DtwKjfyOSXWRIX4t2mhDubM1H09gPhWeth/BJWPHGUw==}
+    peerDependencies:
+      vue: ^3.0.11
+    dependencies:
+      evtd: 0.2.4
+    dev: true
+
   /vdirs/0.1.8_vue@3.2.31:
     resolution: {integrity: sha512-H9V1zGRLQZg9b+GdMk8MXDN2Lva0zx72MPahDKc30v+DtwKjfyOSXWRIX4t2mhDubM1H09gPhWeth/BJWPHGUw==}
     peerDependencies:
@@ -9506,6 +9568,14 @@ packages:
   /void-elements/3.1.0:
     resolution: {integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /vooks/0.2.12:
+    resolution: {integrity: sha512-iox0I3RZzxtKlcgYaStQYKEzWWGAduMmq+jS7OrNdQo1FgGfPMubGL3uGHOU9n97NIvfFDBGnpSvkWyb/NSn/Q==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      evtd: 0.2.4
     dev: true
 
   /vooks/0.2.12_vue@3.2.31:
@@ -9697,14 +9767,13 @@ packages:
       vscode-vue-languageservice: 0.27.30
     dev: true
 
-  /vue-types/4.1.1_vue@3.2.31:
+  /vue-types/4.1.1:
     resolution: {integrity: sha512-Jq2GZ/w6rExJbLA/h7nHBFLciu+YNekgox0DB64wN1snZ4IIJMq+qnqp1/vE4fc7vEjZcP5KGhLzkkSjIHLRzw==}
     engines: {node: '>=12.16.0'}
     peerDependencies:
       vue: ^2.0.0 || ^3.0.0
     dependencies:
       is-plain-object: 5.0.0
-      vue: 3.2.31
     dev: true
 
   /vue/3.2.31:
@@ -9716,19 +9785,18 @@ packages:
       '@vue/server-renderer': 3.2.31_vue@3.2.31
       '@vue/shared': 3.2.31
 
-  /vueuc/0.4.49_vue@3.2.31:
+  /vueuc/0.4.49:
     resolution: {integrity: sha512-WarAC44a/Yx78CxkAgROYLq+LkAeCGA/6wHidVoFmHLbzyF3SiP2nzRNGD/8zJeJInXv18EnWK6A//eGgMMq8w==}
     peerDependencies:
       vue: ^3.0.11
     dependencies:
-      '@css-render/vue3-ssr': 0.15.11_vue@3.2.31
+      '@css-render/vue3-ssr': 0.15.11
       '@juggle/resize-observer': 3.4.0
       css-render: 0.15.11
       evtd: 0.2.4
       seemly: 0.3.6
-      vdirs: 0.1.8_vue@3.2.31
-      vooks: 0.2.12_vue@3.2.31
-      vue: 3.2.31
+      vdirs: 0.1.8
+      vooks: 0.2.12
     dev: true
 
   /vueuc/0.4.58_vue@3.2.31:

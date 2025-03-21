@@ -12,6 +12,7 @@ import {
   VisibleAssertion,
   ValueAssertion,
   isCheckedAssertion,
+  SmsCodeAction,
 } from '@idux/wetest-engine'
 import dayjs from 'dayjs'
 import { SelectorInfo } from '@idux/wetest-ai-selector'
@@ -31,6 +32,15 @@ export function getHoverAction(event: MouseEvent): HoverAction | null {
 export function getWaitForTimeout(params: WaitForTimeoutAction['params']): WaitForTimeoutAction {
   return {
     action: 'waitForTimeout',
+    context: window.__wetest_contextId,
+    page: window.__wetest_pageId,
+    params,
+  }
+}
+
+export function getSmsCode(params: SmsCodeAction['params']): SmsCodeAction {
+  return {
+    action: 'smsCode',
     context: window.__wetest_contextId,
     page: window.__wetest_pageId,
     params,

@@ -17,6 +17,7 @@ import { autoTrySelector } from './utils/common'
 import { Log } from './utils/log'
 import { setTestInfoImplState, getRunnerConfig, getTestInfoImplState } from '@idux/wetest-share'
 import dayjs from 'dayjs'
+import { reqSmsCode } from '@idux/wetest-inject/logics/toolbar/useSmsCode'
 
 class Runner extends EventEmitter {
   private options: RunnerConfig = {
@@ -317,6 +318,23 @@ class Runner extends EventEmitter {
     }
     if (action.action === 'waitForTimeout') {
       await page.waitForTimeout(action.params.time)
+    }
+    if (action.action === 'smsCode') {
+      const params = action.params
+      const smsCode = await reqSmsCode(params)
+      if (smsCode) {
+        console.log("I'm waitting for 1 seconds before filling smsCode:", smsCode)
+        await page.waitForTimeout(1000)
+        const inputEl = page.locator(params.smsId)
+        if (await inputEl.isVisible()) {
+          await inputEl.fill(`${smsCode}`)
+        } else {
+          throw new Error(`[wetest: SmsCode]: Can't find smsId: ${params.smsId}`)
+        }
+        console.log("I'm done for everything")
+      } else {
+        throw new Error(`[wetest: SmsCode]: SmsCode is Empty`)
+      }
     }
     if (action.action === 'input') {
       const pageFn = (selector: string) => page.fill(selector, action.params.content)

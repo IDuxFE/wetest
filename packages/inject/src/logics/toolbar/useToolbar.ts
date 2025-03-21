@@ -5,7 +5,8 @@ import { useRecorder } from '../recorder/useRecorder'
 import { useRecord } from './useRecord'
 import { useElementSnapshot, useUrlAssertion, useElementValue, useElementIsChecked } from './useAssertion'
 import { useWaitTimeDialog } from './useWaitForTimeout'
-import { getWaitForTimeout } from '../../utils/actionsFormatter'
+import { getSmsCode, getWaitForTimeout } from '../../utils/actionsFormatter'
+import { useSmsCodeDialog } from './useSmsCode'
 // import { addEventListener } from '../../utils/dom'
 
 export function getDefaultToolsStatus(): ToolsStatus {
@@ -17,7 +18,7 @@ export function getDefaultToolsStatus(): ToolsStatus {
       elementSnapshot: false,
       elementVisible: false,
       elementValue: false,
-      elementIsChecked: false
+      elementIsChecked: false,
     },
   }
 }
@@ -50,7 +51,7 @@ export function useToolbar(): {
   const { addRecordActionListeners, removeRecordActionListeners } = useRecorder(toolsStatus, recordAction)
 
   const recordWaitForTimeout = useWaitTimeDialog()
-
+  const recordSmsCode = useSmsCodeDialog()
   const recordBtnHandler = useRecord(toolsStatus)
 
   // const screenshotAssertion = useScreenshot(toolsStatus, recordAction)
@@ -62,7 +63,6 @@ export function useToolbar(): {
   const isRecordAction = ref(true)
 
   const recordOpr = computed(() => {
-
     return {
       text: '记录',
       active: false,
@@ -95,8 +95,8 @@ export function useToolbar(): {
             }
             isRecordAction.value = !isRecordAction.value
           },
-        }
-      ]
+        },
+      ],
     }
   })
 
@@ -112,6 +112,25 @@ export function useToolbar(): {
           ...getDefaultToolsStatus(),
           recording: toolsStatus.value.recording,
           hovering: !toolsStatus.value.hovering,
+        }
+      },
+    },
+    {
+      text: 'SMSCode',
+      active: false,
+      disabled: !toolsStatus.value.recording,
+
+      async handler() {
+        removeRecordActionListeners()
+
+        try {
+          removeRecordActionListeners()
+          const data = await recordSmsCode()
+          await recordAction(getSmsCode(data))
+        } catch (err) {
+          console.error(err)
+        } finally {
+          addRecordActionListeners()
         }
       },
     },
