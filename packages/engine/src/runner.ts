@@ -38,6 +38,7 @@ class Runner extends EventEmitter {
     },
     userAgent: {},
     timeout: 30000,
+    waitForNetwork: true,
   }
   private caseName: string = ''
   private traceMap = new Map()
@@ -257,9 +258,13 @@ class Runner extends EventEmitter {
       await page.goto(newUrl, {
         waitUntil: 'load',
       })
-      await page.waitForLoadState('networkidle', {
-        timeout: this.options.timeout,
-      })
+
+      if (this.options.waitForNetwork) {
+        await page.waitForLoadState('networkidle', {
+          timeout: this.options.timeout,
+        })
+      }
+
       page.setDefaultTimeout(this.options.timeout)
       return
     }
@@ -360,9 +365,11 @@ class Runner extends EventEmitter {
       await actionPromise()
     }
     await page.waitForTimeout(600)
-    await page.waitForLoadState('networkidle', {
-      timeout: this.options.timeout,
-    })
+    if (this.options.waitForNetwork) {
+      await page.waitForLoadState('networkidle', {
+        timeout: this.options.timeout,
+      })
+    }
   }
 
   async finish() {

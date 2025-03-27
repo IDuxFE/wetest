@@ -299,4 +299,12 @@ export type RunnerConfig = CommonConfig & {
    * @memberof RunnerConfig
    */
   afterRunCase?: (args: { caseManager: CaseManger; result: any }) => void
+
+  /**
+   * 是否启动等待至少500毫秒没有网络连接，不建议启用，官方说法是api不稳定
+   *
+   * @param {{ caseManager: CaseManger; result: any }} args
+   * @memberof RunnerConfig
+   */
+  waitForNetwork?: boolean
 }

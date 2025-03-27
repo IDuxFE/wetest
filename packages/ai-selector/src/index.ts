@@ -363,7 +363,7 @@ export default class DomSelector {
       this.beforeCurRecursion()
 
       // 配置的埋点属性，就以生成的埋点属性为先
-      if (this.selectorCfg.buryingPoint) {
+      if (this.selectorCfg.buryingPoint && el.getAttribute(this.selectorCfg.buryingPoint)) {
         this.generateLevelMap(this.processBuryingPoint(el))
       }
 
