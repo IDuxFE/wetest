@@ -1,6 +1,6 @@
 {
   "name": "@idux/wetest-engine",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "no code E2E test",
   "publishConfig": {
     "access": "public"
