@@ -37,6 +37,9 @@ module.exports = {
 
     timeout: 30000,
 
+    // 是否启动等待至少500毫秒没有网络连接，不建议启用，官方说法是api不稳定,历史原因，这里配置成true，新的产品建议为false
+    waitForNetwork: false,
+
     // 报告配置，新云图线上拨测提出需求
     reporter: {
       // 测试报告是否总是输出追踪栈，默认只是错误的用例输出

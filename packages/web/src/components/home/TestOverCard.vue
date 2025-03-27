@@ -40,7 +40,7 @@ function goDetail() {
 
         <span class="link" @click.stop="goDetail">查看详情</span>
 
-        <a target="_blank" :href="traceViewerUrl" v-if="isTestFail" class="home-view_trace-link" @click.stop>快速定位错误（推荐）</a>
+        <a target="_blank" :href="traceViewerUrl" class="home-view_trace-link" @click.stop>查看运行快照</a>
       </template>
 
       <template #header-extra> {{ (props.testInfo.endTime - props.testInfo.startTime) / 1000 }} s </template>
