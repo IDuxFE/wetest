@@ -204,6 +204,13 @@ class Runner extends EventEmitter {
         snapshots: true,
         title: this.caseName,
       })
+
+      if (runnerConfig.abortUrl) {
+        await context.route(runnerConfig.abortUrl, (route, request) => {
+          console.log('--global abort url:', request.url())
+          route.abort()
+        })
+      }
       return
     }
 
@@ -244,7 +251,8 @@ class Runner extends EventEmitter {
       })
 
       if (runnerConfig.abortUrl) {
-        await page.route(runnerConfig.abortUrl, route => {
+        await page.route(runnerConfig.abortUrl, (route, req) => {
+          console.log('----page abort url', req.url())
           route.abort()
         })
       }
